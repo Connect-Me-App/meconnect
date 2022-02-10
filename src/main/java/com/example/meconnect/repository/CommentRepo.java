@@ -10,7 +10,8 @@ import com.example.meconnect.entity.Comment;
 @Repository
 public interface CommentRepo extends JpaRepository<Comment, Long> {
 	
-	ArrayList<Comment> findAllByPostID(long postId);
+	
+	ArrayList<Comment> findAllByPostId(long postId);
 	Comment save(Comment comment);
 	
 }

@@ -16,8 +16,6 @@ public class CommentService {
 	@Autowired
 	CommentRepo commentRepo;
 	
-	
-	
 	public Comment saveComment(Comment comment) {
 		
 		Date date= new Date();
@@ -31,6 +29,6 @@ public class CommentService {
 	}
 	
 	public ArrayList<Comment> getAllComment(long postId){
-		return commentRepo.findAllByPostID(postId);
+		return commentRepo.findAllByPostId(postId);
 	}
 }
