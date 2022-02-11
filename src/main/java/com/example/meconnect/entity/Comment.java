@@ -11,21 +11,33 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-@Entity
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+
 @Component
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Entity
+@Getter
+@Setter
 @Table(name = "comments")
 public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private long id;
+	private Long id;
 	
 	@Column(name = "post_id")
-	private long postId;
+	private Long postId;
 	
 	@Column(name = "user_id")
-	private long userId;
+	private Long userId;
 	
 	@Column(name = "text")
 	private String text;
@@ -45,7 +57,7 @@ public class Comment {
 	@Column(name = "updated_by")
 	private String updatedBy;
 
-	public Comment(long id, long postId, long userId, String text, int likes_count, Timestamp creationDate,
+	public Comment(Long id, Long postId, Long userId, String text, int likes_count, Timestamp creationDate,
 			Timestamp updationDate, String createdBy, String updatedBy) {
 		super();
 		this.id = id;
@@ -63,7 +75,7 @@ public class Comment {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -71,7 +83,7 @@ public class Comment {
 		return postId;
 	}
 
-	public void setPostId(long postId) {
+	public void setPostId(Long postId) {
 		this.postId = postId;
 	}
 
@@ -79,7 +91,7 @@ public class Comment {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -129,6 +141,10 @@ public class Comment {
 
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
+	}
+
+	public Comment() {
+		super();
 	}
 	
 }
