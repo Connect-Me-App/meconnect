@@ -2,13 +2,7 @@ package com.example.meconnect.entity;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import javax.persistence.*;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -17,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class Post {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long postId;
 	
@@ -30,6 +24,7 @@ public class Post {
 	public Post() {
 		
 	}
+		
 	
 	public Post(long postId, Long userId, String userName, String postText, String postImageURL, String postVideoURL,
 			int likeCount, String createdBy, String updationBy, Timestamp createdDt, Timestamp updationDt) {
@@ -46,7 +41,6 @@ public class Post {
 		this.createdDt = createdDt;
 		this.updationDt = updationDt;
 	}
-
 
 	@Column(name = "post_text")
 	private String postText;

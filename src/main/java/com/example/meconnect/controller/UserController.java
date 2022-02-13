@@ -47,11 +47,6 @@ public class UserController {
 	
 	@Autowired
 	private JwtUtil jwtUtil;
-	
-	@RequestMapping("/hello")
-	public String hello() {
-		return "everything is work fine";
-	}
     
 //	@PostMapping("/authenticate")
 	@RequestMapping(value="/authenticate",method=RequestMethod.POST)
@@ -62,7 +57,7 @@ public class UserController {
 		try {
 		   authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),authenticationRequest.getPassword()));
 	      }catch(BadCredentialsException e) {
-	    	  throw new Exception("INcorrect password",e);
+	    	  throw new Exception("Incorrect password",e);
 	      }
 	      
 	     

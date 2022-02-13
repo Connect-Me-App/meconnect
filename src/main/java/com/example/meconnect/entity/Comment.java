@@ -29,7 +29,7 @@ import lombok.ToString;
 public class Comment {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
@@ -71,6 +71,8 @@ public class Comment {
 		this.updatedBy = updatedBy;
 	}
 
+
+	
 	public long getId() {
 		return id;
 	}
