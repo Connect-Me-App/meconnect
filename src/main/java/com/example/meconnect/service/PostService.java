@@ -1,45 +1,57 @@
 package com.example.meconnect.service;
 
-import java.util.Date;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-
+import com.example.meconnect.entity.Post;
+import com.example.meconnect.entity.User;
+import com.example.meconnect.mapper.PostMapper;
+import com.example.meconnect.model.PostRequest;
+import com.example.meconnect.model.PostResponse;
+import com.example.meconnect.repository.PostRepo;
+import com.example.meconnect.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.meconnect.entity.Post;
-import com.example.meconnect.repository.PostRepo;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class PostService {
-	
-	@Autowired
-	PostRepo postRepo;
-	
-	public ArrayList<Post> submitPostToDB(Post postData){
-		
-		Date date = new Date();
-		long time = date.getTime();
-		Timestamp dateTime = new Timestamp(time);
-		
-		postData.setUpdationBy(postData.getUserName());
-		postData.setLikeCount(0);
-		postData.setCreatedDt(dateTime);
-		postData.setUpdationDt(dateTime);
-		postData.setCreatedBy(postData.getUserName());
-		postRepo.save(postData);
-		ArrayList<Post> result = retrievePostFromDB();
-		return result;
-	}
-	
-	public ArrayList<Post> retrievePostFromDB(){
-		ArrayList<Post> result = postRepo.findAll();
-		return result;
-	}
-	
-	public ArrayList<Post> deletePostFromDB(long postId){
-		postRepo.deleteById(postId);
-		ArrayList<Post> result = retrievePostFromDB();
-		return result;
-	}
+
+    private final PostMapper postMapper;
+    @Autowired
+    PostRepo postRepo;
+
+    @Autowired
+    UserRepository userRepository;
+
+    public void submitPostToDB(PostRequest postRequest) {
+        Post post = postMapper.dtoToDao(postRequest);
+        postRepo.save(post);
+    }
+
+    public List<PostResponse> getAllPosts() {
+        return postRepo.findAll()
+                .stream()
+                .map(postMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<PostResponse> getAllPostsByUsername(String username) {
+        User user = userRepository.findUserByUsername(username);
+        return postRepo.findByUser(user)
+                .stream()
+                .map(postMapper::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    public void deletePost(Long postId, String username) {
+        postRepo.deleteByPostIdAndUsername(postId,username);
+    }
+
+//	public ArrayList<Post> deletePostFromDB(long postId){
+//		postRepo.deleteById(postId);
+//		ArrayList<Post> result = retrievePostFromDB();
+//		return result;
+//	}
 }

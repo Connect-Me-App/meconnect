@@ -1,0 +1,28 @@
+package com.example.meconnect.model;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.sql.Timestamp;
+import java.time.Instant;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class PostResponse {
+
+    private Long postId;
+    private String postText;
+    private String postImageUrl;
+    private String postVideoUrl;
+    private int likeCount;
+    private String userName;
+    private String createdBy;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
+
+}

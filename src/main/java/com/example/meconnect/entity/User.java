@@ -1,63 +1,85 @@
-package com.example.meconnect.model;
+package com.example.meconnect.entity;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Users {
+@AllArgsConstructor
+@ToString
+@Entity
+@Getter
+@Setter
+@Table(name = "users")
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "first_name")
     private String first_name;
+
+    @Column(name = "middle_name")
     private String middle_name;
+
+    @Column(name = "last_name")
     private String last_name;
+
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "mobile_no")
     private String mobile_no;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "passwordHash")
     private String passwordHash;
+
+    @Column(name = "registered_at")
     private Date registered_at;
+
+    @CreationTimestamp
+    @Column(name = "last_login")
     private Date last_login;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "is_active")
     private Boolean is_active;
+
+
+    @CreationTimestamp
+    @Column(name = "creation_dt", nullable = false, updatable = false)
     private Date creation_dt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_dt")
     private Date updation_dt;
+
+
+    @Column(name = "created_by")
     private String created_by;
+
+    @Column(name = "updated_by")
     private String updated_by;
 
 
-    public Users(Long id, String first_name, String middle_name, String last_name, String username, String mobile_no,
-                 String email, String passwordHash, Date registered_at, Date last_login, String address, Boolean is_active,
-                 Date creation_dt, Date updation_dt, String created_by, String updated_by) {
-        super();
-        this.id = id;
-        this.first_name = first_name;
-        this.middle_name = middle_name;
-        this.last_name = last_name;
-        this.username = username;
-        this.mobile_no = mobile_no;
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.registered_at = registered_at;
-        this.last_login = last_login;
-        this.address = address;
-        this.is_active = is_active;
-        this.creation_dt = creation_dt;
-        this.updation_dt = updation_dt;
-        this.created_by = created_by;
-        this.updated_by = updated_by;
-    }
-
-
-    public Users() {
+    public User() {
         super();
     }
 
-    @Override
-    public String toString() {
-        return "Users [id=" + id + ", first_name=" + first_name + ", middle_name=" + middle_name + ", last_name="
-                + last_name + ", username=" + username + ", mobile_no=" + mobile_no + ", email=" + email + ", passwordHash="
-                + passwordHash + ", registered_at=" + registered_at + ", last_login=" + last_login + ", address=" + address
-                + ", is_active=" + is_active + ", creation_dt=" + creation_dt + ", updation_dt=" + updation_dt
-                + ", created_by=" + created_by + ", updated_by=" + updated_by + "]";
-    }
 
     public Long getId() {
         return id;

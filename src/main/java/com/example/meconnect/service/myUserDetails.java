@@ -1,69 +1,68 @@
 package com.example.meconnect.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
+import com.example.meconnect.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.meconnect.entity.Usersentity;
+import java.util.ArrayList;
+import java.util.Collection;
 
 //import com.meConnect2.meConnect2.entity.Usersentity;
 
 public class myUserDetails implements UserDetails {
-    
-	 private Usersentity usersEntity=null; 
-	
-	
-	public myUserDetails() {
-		super();
-	}
 
-	public myUserDetails(Usersentity usersEntity) {
-		super();
-		this.usersEntity = usersEntity;
-	}
+    private User usersEntity = null;
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
-	}
 
-	@Override
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return usersEntity.getPasswordHash();
-	}
+    public myUserDetails() {
+        super();
+    }
 
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return usersEntity.getUsername();
-	}
+    public myUserDetails(User usersEntity) {
+        super();
+        this.usersEntity = usersEntity;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return usersEntity.getIs_active();
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // TODO Auto-generated method stub
+        return new ArrayList<>();
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return usersEntity.getIs_active();
-	}
+    @Override
+    public String getPassword() {
+        // TODO Auto-generated method stub
+        return usersEntity.getPasswordHash();
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return usersEntity.getIs_active();
-	}
+    @Override
+    public String getUsername() {
+        // TODO Auto-generated method stub
+        return usersEntity.getUsername();
+    }
 
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return usersEntity.getIs_active();
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        return usersEntity.getIs_active();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return usersEntity.getIs_active();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return usersEntity.getIs_active();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        // TODO Auto-generated method stub
+        return usersEntity.getIs_active();
+    }
 
 }
