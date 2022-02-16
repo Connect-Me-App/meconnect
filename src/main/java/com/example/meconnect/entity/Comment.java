@@ -1,150 +1,139 @@
 package com.example.meconnect.entity;
 
-import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.springframework.stereotype.Component;
-
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 
 @Component
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Entity
 @Getter
 @Setter
 @Table(name = "comments")
+@NoArgsConstructor
 public class Comment {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
-	
-	@Column(name = "post_id")
-	private Long postId;
-	
-	@Column(name = "user_id")
-	private Long userId;
-	
-	@Column(name = "text")
-	private String text;
-	
-	@Column(name = "likes_count")
-	private int likes_count;
-	
-	@Column(name = "creation_dt")
-	private Timestamp creationDate;
-	
-	@Column(name = "updation_dt")
-	private Timestamp updationDate;
-	
-	@Column(name = "created_by")
-	private String createdBy;
-	
-	@Column(name = "updated_by")
-	private String updatedBy;
 
-	public Comment(Long id, Long postId, Long userId, String text, int likes_count, Timestamp creationDate,
-			Timestamp updationDate, String createdBy, String updatedBy) {
-		super();
-		this.id = id;
-		this.postId = postId;
-		this.userId = userId;
-		this.text = text;
-		this.likes_count = likes_count;
-		this.creationDate = creationDate;
-		this.updationDate = updationDate;
-		this.createdBy = createdBy;
-		this.updatedBy = updatedBy;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
-	public long getId() {
-		return id;
-	}
+    @Column(name = "post_id")
+    private Long postId;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "user_id")
+    private Long userId;
 
-	public long getPostId() {
-		return postId;
-	}
+    @Column(name = "text")
+    private String text;
 
-	public void setPostId(Long postId) {
-		this.postId = postId;
-	}
+    @Column(name = "likes_count")
+    private int likes_count;
 
-	public long getUserId() {
-		return userId;
-	}
+    @Column(name = "creation_dt")
+    private Timestamp creationDate;
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    @Column(name = "updation_dt")
+    private Timestamp updationDate;
 
-	public String getText() {
-		return text;
-	}
+    @Column(name = "created_by")
+    private String createdBy;
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    @Column(name = "updated_by")
+    private String updatedBy;
 
-	public int getLikes_count() {
-		return likes_count;
-	}
+    public Comment(Long id, Long postId, Long userId, String text, int likes_count, Timestamp creationDate,
+                   Timestamp updationDate, String createdBy, String updatedBy) {
+        super();
+        this.id = id;
+        this.postId = postId;
+        this.userId = userId;
+        this.text = text;
+        this.likes_count = likes_count;
+        this.creationDate = creationDate;
+        this.updationDate = updationDate;
+        this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
+    }
 
-	public void setLikes_count(int likes_count) {
-		this.likes_count = likes_count;
-	}
 
-	public Timestamp getCreationDate() {
-		return creationDate;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public void setCreationDate(Timestamp creationDate) {
-		this.creationDate = creationDate;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Timestamp getUpdationDate() {
-		return updationDate;
-	}
+    public long getPostId() {
+        return postId;
+    }
 
-	public void setUpdationDate(Timestamp updationDate) {
-		this.updationDate = updationDate;
-	}
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
 
-	public String getCreatedBy() {
-		return createdBy;
-	}
+    public long getUserId() {
+        return userId;
+    }
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public String getUpdatedBy() {
-		return updatedBy;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setUpdatedBy(String updatedBy) {
-		this.updatedBy = updatedBy;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	public Comment() {
-		super();
-	}
-	
+    public int getLikes_count() {
+        return likes_count;
+    }
+
+    public void setLikes_count(int likes_count) {
+        this.likes_count = likes_count;
+    }
+
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Timestamp getUpdationDate() {
+        return updationDate;
+    }
+
+    public void setUpdationDate(Timestamp updationDate) {
+        this.updationDate = updationDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+
 }

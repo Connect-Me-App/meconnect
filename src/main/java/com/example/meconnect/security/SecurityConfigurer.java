@@ -1,5 +1,6 @@
 package com.example.meconnect.security;
 
+import com.example.meconnect.filter.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,55 +14,52 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.meconnect.filter.JwtRequestFilter;
-
 //import com.meConnect2.meConnect2.filter.JwtRequestFilter;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
- 
-	@Autowired
-	private UserDetailsService myUserDetailservice;
-	
-	@Autowired
-	private JwtRequestFilter jwtRequestFilter;
-	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.userDetailsService(myUserDetailservice);
-	}
 
- 	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeHttpRequests().antMatchers("/authenticate","/register").permitAll()
-		.anyRequest().authenticated()
-	.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
-		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-		
-	}
+    @Autowired
+    private UserDetailsService myUserDetailservice;
 
-	
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.userDetailsService(myUserDetailservice);
+    }
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeHttpRequests().antMatchers("/authenticate", "/register", "/swagger-ui/**", "/v3/api-docs/**", "/getalluser", "/swagger-ui.html").permitAll()
+                .anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+    }
+
+
 //	@Override
 //	@Bean
 //	public AuthenticationManager authenticationManagerBean() throws Exception {
 //	    return super.authenticationManagerBean();
 //	}
 
- 
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-	    return super.authenticationManagerBean();
-	}
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
-	
-	
-    
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+
 }
