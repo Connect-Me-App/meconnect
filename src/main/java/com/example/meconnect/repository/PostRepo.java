@@ -5,7 +5,6 @@ import com.example.meconnect.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +20,8 @@ public interface PostRepo extends JpaRepository<Post, Long> {
     Post save(Post post);
 
     List<Post> findByUser(User user);
+
+    Post findByPostIdAndIsDeletedFalse(Long postId);
 
     @Transactional
     @Modifying

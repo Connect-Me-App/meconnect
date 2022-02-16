@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -28,12 +29,15 @@ public class Post {
     @JoinColumn(name = "user_name", referencedColumnName = "username")
     private User user;
 
+    @NotNull
     @Column(name = "post_text")
     private String postText;
 
+    @NotNull
     @Column(name = "post_image_url")
     private String postImageURL;
 
+    @NotNull
     @Column(name = "post_video_url")
     private String postVideoURL;
 

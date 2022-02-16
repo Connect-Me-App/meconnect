@@ -1,139 +1,57 @@
 package com.example.meconnect.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
-
-@Component
-@ToString
+@Data
 @Entity
-@Getter
-@Setter
-@Table(name = "comments")
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "comments")
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "post_id")
-    private Long postId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id",referencedColumnName = "id")
+    private Post post;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_name",referencedColumnName = "username")
+    private User user;
 
-    @Column(name = "text")
-    private String text;
+    @NotNull
+    @Column(name = "comment_text")
+    private String commentText;
 
     @Column(name = "likes_count")
     private int likes_count;
 
-    @Column(name = "creation_dt")
-    private Timestamp creationDate;
-
-    @Column(name = "updation_dt")
-    private Timestamp updationDate;
-
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "updated_by")
-    private String updatedBy;
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 
-    public Comment(Long id, Long postId, Long userId, String text, int likes_count, Timestamp creationDate,
-                   Timestamp updationDate, String createdBy, String updatedBy) {
-        super();
-        this.id = id;
-        this.postId = postId;
-        this.userId = userId;
-        this.text = text;
-        this.likes_count = likes_count;
-        this.creationDate = creationDate;
-        this.updationDate = updationDate;
-        this.createdBy = createdBy;
-        this.updatedBy = updatedBy;
-    }
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public int getLikes_count() {
-        return likes_count;
-    }
-
-    public void setLikes_count(int likes_count) {
-        this.likes_count = likes_count;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Timestamp getUpdationDate() {
-        return updationDate;
-    }
-
-    public void setUpdationDate(Timestamp updationDate) {
-        this.updationDate = updationDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(String updatedBy) {
-        this.updatedBy = updatedBy;
-    }
 
 
 }

@@ -52,4 +52,10 @@ public class PostService {
         postRepo.deleteByUserNameAndPostId(username,postId);
     }
 
+    public Post getPostByPostId(Long postId){
+        Post post = postRepo.findByPostIdAndIsDeletedFalse(postId);
+        return post;
+    }
+
+
 }
