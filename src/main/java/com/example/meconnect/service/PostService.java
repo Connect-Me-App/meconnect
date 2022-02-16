@@ -9,6 +9,7 @@ import com.example.meconnect.repository.PostRepo;
 import com.example.meconnect.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,11 +28,13 @@ public class PostService {
 
     public void submitPostToDB(PostRequest postRequest) {
         Post post = postMapper.dtoToDao(postRequest);
+        post.setDeleted(false);
+        post.setCreatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
         postRepo.save(post);
     }
 
     public List<PostResponse> getAllPosts() {
-        return postRepo.findAll()
+        return postRepo.findAllByIsDeletedFalse()
                 .stream()
                 .map(postMapper::mapToDto)
                 .collect(Collectors.toList());
@@ -45,13 +48,8 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
-    public void deletePost(Long postId, String username) {
-        postRepo.deleteByPostIdAndUsername(postId,username);
+    public void deletePost(String username,Long postId) {
+        postRepo.deleteByUserNameAndPostId(username,postId);
     }
 
-//	public ArrayList<Post> deletePostFromDB(long postId){
-//		postRepo.deleteById(postId);
-//		ArrayList<Post> result = retrievePostFromDB();
-//		return result;
-//	}
 }

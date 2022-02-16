@@ -44,7 +44,7 @@ public class PostController {
 	@RequestMapping(value = "/{postId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deletePostById(@PathVariable Long postId){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		postService.deletePost(postId,username);
+		postService.deletePost(username,postId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
