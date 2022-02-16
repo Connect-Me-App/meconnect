@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -25,31 +26,36 @@ public class Post {
     private Long postId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userName", referencedColumnName = "username")
+    @JoinColumn(name = "user_name", referencedColumnName = "username")
     private User user;
 
-
-    @Column(name = "postText")
+    @NotNull
+    @Column(name = "post_text")
     private String postText;
 
-    @Column(name = "postImageURL")
+    @NotNull
+    @Column(name = "post_image_url")
     private String postImageURL;
 
-    @Column(name = "postVideoURL")
+    @NotNull
+    @Column(name = "post_video_url")
     private String postVideoURL;
 
-    @Column(name = "likeCount")
+    @Column(name = "like_count")
     private int likeCount;
 
-    @Column(name = "createdBy")
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
+    @Column(name = "created_by")
     private String createdBy;
 
     @CreationTimestamp
-    @Column(name = "createdAt")
+    @Column(name = "created_at")
     private Timestamp createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updatedAt")
+    @Column(name = "updated_at")
     private Timestamp updatedAt;
 
 }

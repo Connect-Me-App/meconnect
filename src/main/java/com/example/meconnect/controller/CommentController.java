@@ -1,31 +1,44 @@
 package com.example.meconnect.controller;
 
-import com.example.meconnect.entity.Comment;
+import com.example.meconnect.model.CommentRequest;
+import com.example.meconnect.model.CommentResponse;
 import com.example.meconnect.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.ws.rs.Path;
+import java.util.List;
 
-@Controller
-@RequestMapping(value = "/api/commentService")
+import static org.springframework.http.ResponseEntity.status;
+
+@RestController
+@RequestMapping(value = "/api/comments")
 public class CommentController {
 
     @Autowired
     CommentService commentService;
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Comment saveComment(@RequestBody Comment comment) {
-        return commentService.saveComment(comment);
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<Void> createComment(@RequestBody CommentRequest comment) {
+        comment.setUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        commentService.submitCommentToDB(comment);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/getAllComments/{postId}", method = RequestMethod.GET)
-    public ArrayList<Comment> getAllComments(@PathVariable("postId") long postId) {
-        return commentService.getAllComment(postId);
+    public ResponseEntity<List<CommentResponse>> getCommentsByPostId(@PathVariable Long postId){
+        return status(HttpStatus.OK).body(commentService.getCommentsByPostId(postId));
+    }
+
+    @RequestMapping(value = "/{postId}/{commentId}",method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteByCommentId(@PathVariable Long postId, @PathVariable Long commentId){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        commentService.deleteByCommentId(username,postId,commentId);
+        return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
 }
