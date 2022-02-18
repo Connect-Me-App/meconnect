@@ -32,7 +32,7 @@ public class PostMapper {
                 .postText(post.getPostText())
                 .postImageUrl(post.getPostImageURL())
                 .postVideoUrl(post.getPostVideoURL())
-                .likeCount(0)
+                .likeCount(post.getLikeCount())
                 .createdBy(post.getUser().getUsername())
                 .createdAt(post.getCreatedAt())
                 .updatedAt(post.getUpdatedAt())

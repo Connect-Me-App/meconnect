@@ -1,10 +1,12 @@
 package com.example.meconnect.controller;
 
 import com.example.meconnect.entity.User;
+import com.example.meconnect.entity.VerificationToken;
 import com.example.meconnect.model.AuthenticateRequest;
 import com.example.meconnect.model.AuthenticationResponse;
 import com.example.meconnect.model.Users;
 import com.example.meconnect.service.Usersservice;
+import com.example.meconnect.service.Usersserviceimpl;
 import com.example.meconnect.service.myUserDetailService;
 import com.example.meconnect.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +38,9 @@ public class UserController {
 
     @Autowired
     private Usersservice usersService;
+
+    @Autowired
+    private Usersserviceimpl usersserviceimpl;
 
 
     @Autowired
@@ -99,6 +105,24 @@ public class UserController {
 
         return ResponseEntity.ok(userEntity);
     }
+
+
+
+    @GetMapping("/auccountToken/{token}")
+    public ResponseEntity<?> verifyUser(@PathVariable String token){
+
+        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+
+//        System.out.println("*__________***** "+username+" ****************");
+
+
+        VerificationToken verifi= usersserviceimpl.verification(token);
+              if(verifi==null){
+                  return new ResponseEntity<>("user verify fail please enter right token ",HttpStatus.NOT_FOUND);
+              }
+        return new ResponseEntity<>("user verify succesfully ",HttpStatus.OK);
+    }
+
 
 
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -40,6 +41,7 @@ public class Post {
     @NotNull
     @Column(name = "post_video_url")
     private String postVideoURL;
+
 
     @Column(name = "like_count")
     private int likeCount;

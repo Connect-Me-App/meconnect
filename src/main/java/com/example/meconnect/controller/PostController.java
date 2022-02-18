@@ -26,13 +26,16 @@ public class PostController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<Void> createPost(@RequestBody PostRequest postRequest) {
+
+           System.out.println(" this is working fine line 30");
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         postRequest.setUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         postService.submitPostToDB(postRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<List<PostResponse>> retrieveAllPosts() {
+    public ResponseEntity<?> retrieveAllPosts() {
         return status(HttpStatus.OK).body(postService.getAllPosts());
     }
 
