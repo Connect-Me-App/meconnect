@@ -19,6 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
+
 //import com.meConnect2.meConnect2.entity.Usersentity;
 //import com.meConnect2.meConnect2.model.AuthenticateRequest;
 //import com.meConnect2.meConnect2.model.AuthenticationResponse;
@@ -113,9 +115,6 @@ public class UserController {
 
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
 
-//        System.out.println("*__________***** "+username+" ****************");
-
-
         VerificationToken verifi= usersserviceimpl.verification(token);
               if(verifi==null){
                   return new ResponseEntity<>("user verify fail please enter right token ",HttpStatus.NOT_FOUND);
@@ -123,6 +122,20 @@ public class UserController {
         return new ResponseEntity<>("user verify succesfully ",HttpStatus.OK);
     }
 
+
+    @GetMapping("/getUser/{username}")
+    public ResponseEntity<?> getUserByusername(@PathVariable String username){
+             if(username==null){
+                 return  new ResponseEntity<>("Username cannot be null " ,HttpStatus.NO_CONTENT);
+             }
+
+             Users user=usersserviceimpl.getUserByusername(username);
+               if(user==null){
+                   return new ResponseEntity<>("user not present by particular username", HttpStatus.NOT_FOUND);
+               }
+
+             return new ResponseEntity<>(user,HttpStatus.OK);
+    }
 
 
 }

@@ -6,10 +6,8 @@ import com.example.meconnect.model.Users;
 import com.example.meconnect.repository.UserRepository;
 import com.example.meconnect.repository.verificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.security.PrivateKey;
 import java.util.*;
 
 //import com.meConnect2.meConnect2.entity.Usersentity;
@@ -39,6 +37,11 @@ public class Usersserviceimpl implements Usersservice {
         usersEntity.setAddress(user.getAddress());
         usersEntity.setEmail(user.getEmail());
         usersEntity.setMobile_no(user.getMobile_no());
+        usersEntity.setCity(user.getCity());
+        usersEntity.setEducation(user.getEducation());
+       usersEntity.setAboutyou(user.getAboutyou());
+        usersEntity.setDob(user.getDob());
+        usersEntity.setCountry(user.getCountry());
        //usersEntity.setIs_active(user.getIs_active());
          usersEntity.setIs_active(false);
         usersEntity.setPasswordHash(user.getPasswordHash());
@@ -51,11 +54,11 @@ public class Usersserviceimpl implements Usersservice {
 //
         String Token=generateVerificationToken(user2);
         System.out.println("*-------"+Token+"-------------*");
-//
-//        mailService.sendEmail(user2.getEmail(),"verifiy your account ",
-//                "Thank you for signing up to meconnect \n" +
-//                        " please click on the below url to activate your account : \n" +
-//                        "                \"http://localhost:8080/auccountverification/\" "+ Token);
+
+        mailService.sendEmail(user2.getEmail(),"verifiy your account ",
+                "Thank you for signing up to meconnect \n" +
+                        " please click on the below url to activate your account : \n" +
+                        "                \"http://localhost:8080/auccountverification/\" "+ Token);
 
         return user2;
         //return userRepository.save(usersEntity);
@@ -150,10 +153,41 @@ public class Usersserviceimpl implements Usersservice {
         usersEntity.setIs_active(user.getIs_active());
         usersEntity.setPasswordHash(user.getPasswordHash());
         usersEntity.setUsername(user.getUsername());
+        usersEntity.setCity(user.getCity());
+        usersEntity.setEducation(user.getEducation());
+        usersEntity.setAboutyou(user.getAboutyou());
+        usersEntity.setDob(user.getDob());
+        usersEntity.setCountry(user.getCountry());
 
         userRepository.save(usersEntity);
 
     }
+
+     public Users  getUserByusername(String username){
+        User user=userRepository.findUserByUsername(username);
+         if(user==null){
+             return null;
+         }
+          Users users=new Users();
+           users.setId(user.getId());
+           users.setFirst_name(user.getFirst_name());
+           users.setMiddle_name(user.getMiddle_name());
+           users.setLast_name(user.getLast_name());
+           users.setAddress(user.getAddress());
+           users.setEducation(user.getEducation());
+           users.setEmail(user.getEmail());
+           users.setMobile_no(user.getMobile_no());
+           users.setCity(user.getCity());
+           users.setUsername(user.getUsername());
+           users.setPasswordHash(user.getPasswordHash());
+           users.setAboutyou(user.getAboutyou());
+           users.setCountry(user.getCountry());
+           users.setCity(user.getCity());
+           users.setDob(user.getDob());
+           users.setIs_active(user.getIs_active());
+
+          return users;
+     }
 
 
 }
