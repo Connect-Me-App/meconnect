@@ -2,6 +2,7 @@ package com.example.meconnect.model;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import java.util.Date;
 
 
@@ -33,6 +34,8 @@ public class Users {
      private  String dob;
      private String country;
      private String aboutyou;
+    private String profileurl;
+    private int isonline;
 
 
 //    public Users(Long id, String first_name, String middle_name, String last_name, String username, String mobile_no,

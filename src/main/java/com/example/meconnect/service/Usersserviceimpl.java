@@ -6,6 +6,7 @@ import com.example.meconnect.model.Users;
 import com.example.meconnect.repository.UserRepository;
 import com.example.meconnect.repository.verificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -41,6 +42,8 @@ public class Usersserviceimpl implements Usersservice {
         usersEntity.setEducation(user.getEducation());
        usersEntity.setAboutyou(user.getAboutyou());
         usersEntity.setDob(user.getDob());
+        usersEntity.setProfileurl(user.getProfileurl());
+        usersEntity.setIsonline(user.getIsonline());
         usersEntity.setCountry(user.getCountry());
        //usersEntity.setIs_active(user.getIs_active());
          usersEntity.setIs_active(false);
@@ -81,7 +84,7 @@ public class Usersserviceimpl implements Usersservice {
 
      public VerificationToken verification(String token){
           VerificationToken verifi=verificationTokenRepository.findByToken(token);
-             String username=verifi.getUser().getUsername();
+
         // System.out.println("*______anshu look line number 81 ____***** "+token+" ****************");
          //String username=SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -89,6 +92,8 @@ public class Usersserviceimpl implements Usersservice {
                return verifi;
            }
 
+
+         String username=verifi.getUser().getUsername();
            User user =userRepository.findUserByUsername(username);
 
 //
@@ -102,7 +107,9 @@ public class Usersserviceimpl implements Usersservice {
          if(verifi.getToken().equals(token)){
              System.out.println("******* the username and token verification succcessdully*****" + token);
              user.setIs_active(true);
-             verifi.setToken(String.valueOf(99999999));
+             verifi.setToken(null);
+             verifi.setUser(null);
+             verificationTokenRepository.save(verifi);
          }
            userRepository.save(user);
 
@@ -158,6 +165,8 @@ public class Usersserviceimpl implements Usersservice {
         usersEntity.setAboutyou(user.getAboutyou());
         usersEntity.setDob(user.getDob());
         usersEntity.setCountry(user.getCountry());
+        usersEntity.setProfileurl(user.getProfileurl());
+        usersEntity.setIsonline(user.getIsonline());
 
         userRepository.save(usersEntity);
 
@@ -185,8 +194,35 @@ public class Usersserviceimpl implements Usersservice {
            users.setCity(user.getCity());
            users.setDob(user.getDob());
            users.setIs_active(user.getIs_active());
+           users.setIsonline(user.getIsonline());
+           users.setProfileurl(user.getProfileurl());
 
           return users;
+     }
+
+     public void deleteToken(String token){
+         verificationTokenRepository.deleteByToken(token);
+     }
+
+     public int sendMailForForgetPasssword(String token, User user){
+           String url="http://localhost:8080/auccountverification/";
+         try {
+//             mailService.sendEmail(user.getEmail(), "reset your password  ",
+//                     " thankyou \n" +
+//                             " please click on the below url to activate your account : \n" +
+//                                            url + token);
+         } catch (Exception e){
+             e.printStackTrace();
+             return 0;
+         }
+
+         return 1;
+     }
+
+
+     public User updatePassword(User user, String password){
+              user.setPasswordHash(password);
+        return userRepository.save(user);
      }
 
 

@@ -86,6 +86,11 @@ public class User implements Serializable {
     @Column(name = "aboutyou")
     private String aboutyou;
 
+    @Column(name = "profileurl")
+     private String profileurl;
+    @Column(name = "isonline")
+     private int isonline;
+
 //    public User() {
 //        super();
 //    }
