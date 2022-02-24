@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+
+import java.sql.Timestamp;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 @NoArgsConstructor
@@ -19,20 +19,32 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 public class Likes {
-	
-	@Id
+
+    @Id
     @GeneratedValue(strategy = IDENTITY)
-   private Long id;
-	
-   private int likeType;
-   
-   @ManyToOne
-   @JoinColumn(name = "postid", referencedColumnName = "id")
-   private  Post post;
-   
-   @ManyToOne
-   @JoinColumn(name = "userid", referencedColumnName = "username")
-   private User  user;
+    private Long id;
+
+    private int likeType;
+
+    @ManyToOne
+    @JoinColumn(name = "postid", referencedColumnName = "id")
+    private Post post;
+
+    @ManyToOne
+    @JoinColumn(name = "userid", referencedColumnName = "username")
+    private User user;
+
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Timestamp createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
+
 //
 //public Long getId() {
 //	return id;
@@ -65,5 +77,5 @@ public class Likes {
 //public void setUser(User user) {
 //	this.user = user;
 //}
-   
+
 }

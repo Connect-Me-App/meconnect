@@ -11,9 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class CommentMapper {
@@ -24,7 +21,7 @@ public class CommentMapper {
     @Autowired
     Usersservice userService;
 
-    public Comment dtoToDao(CommentRequest comment){
+    public Comment dtoToDao(CommentRequest comment) {
         Post post = postService.getPostByPostId(comment.getPostId());
         User user = userService.getUserByUserName(comment.getUserName());
         return Comment.builder()

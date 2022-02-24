@@ -58,7 +58,7 @@ public class myUserDetails implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         // TODO Auto-generated method stub
-       // return usersEntity.getIs_active();
+        // return usersEntity.getIs_active();
         return true;
     }
 

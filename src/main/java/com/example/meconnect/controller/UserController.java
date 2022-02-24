@@ -20,8 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Path;
-
 //import com.meConnect2.meConnect2.entity.Usersentity;
 //import com.meConnect2.meConnect2.model.AuthenticateRequest;
 //import com.meConnect2.meConnect2.model.AuthenticationResponse;
@@ -110,81 +108,76 @@ public class UserController {
     }
 
 
-
     @GetMapping("/auccountToken/{token}")
-    public ResponseEntity<?> verifyUser(@PathVariable String token){
+    public ResponseEntity<?> verifyUser(@PathVariable String token) {
 
-        String username= SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        VerificationToken verifi= usersserviceimpl.verification(token);
-              if(verifi==null){
-                  return new ResponseEntity<>("user verify fail please enter right token ",HttpStatus.NOT_FOUND);
-              }
+        VerificationToken verifi = usersserviceimpl.verification(token);
+        if (verifi == null) {
+            return new ResponseEntity<>("user verify fail please enter right token ", HttpStatus.NOT_FOUND);
+        }
 
-              //usersserviceimpl.deleteToken(token);
+        //usersserviceimpl.deleteToken(token);
 
-        return new ResponseEntity<>("user verify succesfully ",HttpStatus.OK);
+        return new ResponseEntity<>("user verify succesfully ", HttpStatus.OK);
     }
 
 
     @GetMapping("/getUser/{username}")
-    public ResponseEntity<?> getUserByusername(@PathVariable String username){
-             if(username==null){
-                 return  new ResponseEntity<>("Username cannot be null " ,HttpStatus.NOT_FOUND);
-             }
+    public ResponseEntity<?> getUserByusername(@PathVariable String username) {
+        if (username == null) {
+            return new ResponseEntity<>("Username cannot be null ", HttpStatus.NOT_FOUND);
+        }
 
-             Users user=usersserviceimpl.getUserByusername(username);
-               if(user==null){
-                   return new ResponseEntity<>("user not present by particular username", HttpStatus.NOT_FOUND);
-               }
+        Users user = usersserviceimpl.getUserByusername(username);
+        if (user == null) {
+            return new ResponseEntity<>("user not present by particular username", HttpStatus.NOT_FOUND);
+        }
 
-             return new ResponseEntity<>(user,HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 
+    @GetMapping("/forgetPassword/{username}")
+    public ResponseEntity<?> getforgetpassword(@PathVariable String username) {
 
-       @GetMapping("/forgetPassword/{username}")
-    public ResponseEntity<?> getforgetpassword(@PathVariable String  username){
+        if (username == null) {
+            return new ResponseEntity<>("Username cannot be null ", HttpStatus.NOT_FOUND);
+        }
 
-           if(username==null){
-               return  new ResponseEntity<>("Username cannot be null " ,HttpStatus.NOT_FOUND);
-           }
+        User user = usersserviceimpl.getUserByUserName(username);
 
-           User user=usersserviceimpl.getUserByUserName(username);
+        if (user == null) {
+            return new ResponseEntity<>("Please enter correct username", HttpStatus.NOT_FOUND);
+        }
 
-           if(user==null){
-               return new ResponseEntity<>("Please enter correct username", HttpStatus.NOT_FOUND);
-           }
+        String token = usersserviceimpl.generateVerificationToken(user);
+        System.out.println("***token for email verification ***********___________" + token + "  ____________**********");
 
-           String  token= usersserviceimpl.generateVerificationToken(user);
-           System.out.println("***token for email verification ***********___________"+token+"  ____________**********");
+        int checkStatus = usersserviceimpl.sendMailForForgetPasssword(token, user);
+        if (checkStatus == 0) {
+            return new ResponseEntity<>("we cannot find your email address in our database ", HttpStatus.NOT_FOUND);
+        }
 
-                int checkStatus =usersserviceimpl.sendMailForForgetPasssword(token,user);
-                 if(checkStatus==0){
-                     return new ResponseEntity<>("we cannot find your email address in our database ", HttpStatus.NOT_FOUND);
-                 }
-
-        return new ResponseEntity<>("successfully send the verification code on register email with this "+username, HttpStatus.OK);
+        return new ResponseEntity<>("successfully send the verification code on register email with this " + username, HttpStatus.OK);
     }
-
 
 
     @PostMapping("/forgetPasswordUpdate")
-    public ResponseEntity<?> updatePassword(@RequestBody ForgetpasswordDto forgetpasswordDto){
+    public ResponseEntity<?> updatePassword(@RequestBody ForgetpasswordDto forgetpasswordDto) {
 
-               String username=forgetpasswordDto.getUsername();
-               String password=forgetpasswordDto.getPassword();
-        System.out.println("+++++++++line 177++++++++++"+username+"__________________");
-               User user=usersserviceimpl.getUserByUserName(username);
-               if(user==null){
-                   return new ResponseEntity<>("Please enter correct username", HttpStatus.NOT_FOUND);
-               }
-               User updateuser=usersserviceimpl.updatePassword(user,password);
+        String username = forgetpasswordDto.getUsername();
+        String password = forgetpasswordDto.getPassword();
+        System.out.println("+++++++++line 177++++++++++" + username + "__________________");
+        User user = usersserviceimpl.getUserByUserName(username);
+        if (user == null) {
+            return new ResponseEntity<>("Please enter correct username", HttpStatus.NOT_FOUND);
+        }
+        User updateuser = usersserviceimpl.updatePassword(user, password);
 
-        return new ResponseEntity<>(user,HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
-
-
 
 
 }

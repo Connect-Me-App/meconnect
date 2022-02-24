@@ -77,9 +77,9 @@ public class User implements Serializable {
     private String city;
 
     @Column(name = "education")
-    private String  education;
+    private String education;
     @Column(name = "dob")
-    private  String dob;
+    private String dob;
     @Column(name = "country")
     private String country;
 
@@ -87,9 +87,9 @@ public class User implements Serializable {
     private String aboutyou;
 
     @Column(name = "profileurl")
-     private String profileurl;
+    private String profileurl;
     @Column(name = "isonline")
-     private int isonline;
+    private int isonline;
 
 //    public User() {
 //        super();
@@ -222,6 +222,6 @@ public class User implements Serializable {
 //
 //    public void setUpdated_by(String updated_by) {
 //        this.updated_by = updated_by;
-  // }
+    // }
 
 }

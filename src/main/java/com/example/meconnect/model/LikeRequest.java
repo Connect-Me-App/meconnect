@@ -10,13 +10,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LikeRequest {
-	
-	
-	private int liketype;
+
+
+    private int liketype;
     private Long postid;
-    
-    
-    
+
+
 //    public int getLiketype() {
 //		return liketype;
 //	}
@@ -29,7 +28,6 @@ public class LikeRequest {
 //	public void setPostid(Long postid) {
 //		this.postid = postid;
 //	}
-	
-	
-	
+
+
 }

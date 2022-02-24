@@ -1,12 +1,13 @@
 package com.example.meconnect.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
@@ -24,11 +25,11 @@ public class Comment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id",referencedColumnName = "id")
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_name",referencedColumnName = "username")
+    @JoinColumn(name = "user_name", referencedColumnName = "username")
     private User user;
 
     @NotNull
@@ -51,7 +52,6 @@ public class Comment {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
-
 
 
 }
