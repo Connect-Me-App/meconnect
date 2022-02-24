@@ -97,14 +97,20 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/updateuser/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateuser(@PathVariable Long id, @RequestBody Users user) {
-        User userEntity = usersService.getUser(id);
+    @RequestMapping(value = "/updateuser/{username}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateuser(@PathVariable String username, @RequestBody Users user) {
+
+        if (username == null) {
+            return new ResponseEntity<>("username cannot be null  " , HttpStatus.NOT_FOUND);
+        }
+
+        User userEntity = usersService.getUserByUserName(username);
 
         if (userEntity == null) {
-            return new ResponseEntity<>("user with particular " + id + "notfound", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("user with particular " + username+ "notfound", HttpStatus.NOT_FOUND);
         }
-        usersService.updateuser(user, id);
+
+        usersService.updateuser(user,username);
 
         return ResponseEntity.ok(userEntity);
     }
