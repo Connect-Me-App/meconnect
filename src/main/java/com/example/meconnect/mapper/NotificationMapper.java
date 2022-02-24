@@ -22,8 +22,8 @@ public class NotificationMapper {
                 .createdAt(notification.getCreatedAt())
                 .updatedAt(notification.getUpdatedAt())
                 .url(notification.getUrl())
-                .createdBy(notification.getUser().getUsername())
-                .updatedBy(notification.getUser().getUsername())
+                .createdBy(notification.getCreatedBy())
+                .updatedBy(notification.getUpdatedBy())
                 .build();
     }
 
