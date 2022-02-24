@@ -19,5 +19,6 @@ public class NotificationResponse {
     private Timestamp updatedAt;
     private String createdBy;
     private String updatedBy;
+    private String type;
     private Long url;
 }

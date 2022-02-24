@@ -8,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-
 import java.sql.Timestamp;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -27,11 +26,11 @@ public class Likes {
     private int likeType;
 
     @ManyToOne
-    @JoinColumn(name = "postid", referencedColumnName = "id")
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "userid", referencedColumnName = "username")
+    @JoinColumn(name = "user_name", referencedColumnName = "username")
     private User user;
 
     @Column(name = "created_by")
@@ -44,38 +43,5 @@ public class Likes {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Timestamp updatedAt;
-
-//
-//public Long getId() {
-//	return id;
-//}
-//
-//public void setId(Long id) {
-//	this.id = id;
-//}
-//
-//public int getLikeType() {
-//	return likeType;
-//}
-//
-//public void setLikeType(int likeType) {
-//	this.likeType = likeType;
-//}
-//
-//public Post getPost() {
-//	return post;
-//}
-//
-//public void setPost(Post post) {
-//	this.post = post;
-//}
-//
-//public User getUser() {
-//	return user;
-//}
-//
-//public void setUser(User user) {
-//	this.user = user;
-//}
 
 }

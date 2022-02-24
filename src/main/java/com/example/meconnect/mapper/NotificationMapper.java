@@ -24,8 +24,8 @@ public class NotificationMapper {
                 .url(notification.getUrl())
                 .createdBy(notification.getCreatedBy())
                 .updatedBy(notification.getUpdatedBy())
+                .type(notification.getType())
                 .build();
     }
-
 
 }

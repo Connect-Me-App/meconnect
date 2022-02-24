@@ -15,5 +15,6 @@ public interface NotificationRepo extends JpaRepository<Notification, Long> {
 
     @Transactional
     @Query(value = "SELECT * FROM notification", nativeQuery = true)
-    List<Notification> findTop10ByUserNameAndIsReadFalse(String userName);
+    List<Notification> findNotification(String userName);
 }
+//WHERE user_name = ?1 AND is_read = 0
