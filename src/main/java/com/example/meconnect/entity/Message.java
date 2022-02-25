@@ -23,13 +23,14 @@ public class Message {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private Long messageId;
-    @OneToOne
-    @JoinColumn(name="source_id")
-    private User authorUser;
 
-    @OneToOne
-    @JoinColumn(name="target_id")
-    private User recipientUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_user_id",referencedColumnName = "id")
+    private User senderUser;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="target_user_id",referencedColumnName = "id")
+    private User targetUser;
 
     @NotNull
     @Column(name="message")

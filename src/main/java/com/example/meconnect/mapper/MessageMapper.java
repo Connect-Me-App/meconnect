@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.meconnect.entity.Message;
-import com.example.meconnect.entity.User;
 import com.example.meconnect.model.ChatDTO;
 import com.example.meconnect.service.Usersservice;
 
@@ -23,8 +22,8 @@ public class MessageMapper {
         for(Message message :messages) {
             ChatDTO chatDTO= ChatDTO.builder()
                     .messageId(message.getMessageId())
-                    .sourceId(message.getAuthorUser().getId())
-                    .targetId(message.getRecipientUser().getId())
+                    .senderId(message.getSenderUser().getId())
+                    .targetId(message.getTargetUser().getId())
                     .messageText(message.getMessageText())
                     .build();
             chatDTOs.add(chatDTO);
@@ -34,8 +33,8 @@ public class MessageMapper {
     }
     public Message mapChatDTOtoMessage(ChatDTO chatDTO) {
         return Message.builder()
-                .authorUser(usersservice.getUser(chatDTO.getSourceId()))
-                .recipientUser(usersservice.getUser(chatDTO.getTargetId()))
+                .senderUser(usersservice.getUser(chatDTO.getSenderId()))
+                .targetUser(usersservice.getUser(chatDTO.getTargetId()))
                 .messageText(chatDTO.getMessageText())
                 .build();
     }

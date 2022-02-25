@@ -34,14 +34,15 @@ public class MessageService {
        // message.setSentAt(LocalDateTime.now());
         messageRepo.save(message);
     }
-    public List<ChatDTO> getExistingMessages(long authorId,long recipientId){
-        List<Message> messages=messageRepo.getExistingMessages(authorId, recipientId);
+    public List<ChatDTO> getExistingMessages(long senderId,long targetId){
+        List<Message> messages=messageRepo.getExistingMessages(senderId, targetId);
+        this.updateStatus(senderId,targetId);
         return messageMapper.mapMessagesToChatDTO(messages);
     }
     public void deleteMessage(long messageId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user=userRepository.findUserByUsername(username);
-        messageRepo.deleteBySourceIdAndMessageId(user.getId(),messageId);
+        messageRepo.deleteBySenderIdAndMessageId(user.getId(),messageId);
     }
 
     public void updateStatus(long to,long from) {

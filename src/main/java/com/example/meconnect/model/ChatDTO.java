@@ -9,7 +9,7 @@ import lombok.Data;
 @Builder
 public class ChatDTO {
     private Long messageId;
-    private Long sourceId;
+    private Long senderId;
     private Long targetId;
     private String messageText;
     private Timestamp sentAt;
@@ -18,7 +18,7 @@ public class ChatDTO {
                    Timestamp sentAt) {
         super();
         this.messageId = messageId;
-        this.sourceId = sourceId;
+        this.senderId = sourceId;
         this.targetId = targetId;
         this.messageText = messageText;
         this.sentAt=sentAt;
@@ -36,11 +36,11 @@ public class ChatDTO {
     public void setMessageId(Long messageId) {
         this.messageId = messageId;
     }
-    public Long getSourceId() {
-        return sourceId;
+    public Long getSenderId() {
+        return senderId;
     }
-    public void setSourceId(Long sourceId) {
-        this.sourceId = sourceId;
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
     }
     public Long getTargetId() {
         return targetId;
