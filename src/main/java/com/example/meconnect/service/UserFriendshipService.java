@@ -125,6 +125,13 @@ public class UserFriendshipService {
     }
 
 
+      public boolean checkFriendStatus(String currentUsername ,String friendusername){
+          User currentUser=usersserviceimpl.getUserByUserName(currentUsername);
+          User friendUser=usersserviceimpl.getUserByUserName(friendusername);
+
+          return user_friendRepository.checkFriendStatus(currentUser,friendUser);
+      }
+
      public Users converterUserentity(User user){
 
          Users users=new Users();

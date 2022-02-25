@@ -191,6 +191,18 @@ public class UserController {
     }
 
 
+    @GetMapping("/checkavailableusername/{username}")
+    public ResponseEntity<?>   checkUsernamepresent(@PathVariable String username){
+                  if(username == null){
+                      return new ResponseEntity<>("username cannot be null ", HttpStatus.NOT_FOUND);
+                  }
+
+                    Users users=usersserviceimpl.getUserByusername(username);
+                     if(users!=null){
+                         return new ResponseEntity<>("username already taken by another user ",HttpStatus.NOT_FOUND);
+                     }
+        return new ResponseEntity<>("username available ",HttpStatus.OK);
+    }
 
 
 }

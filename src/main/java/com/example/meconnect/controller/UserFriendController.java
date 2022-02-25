@@ -148,4 +148,28 @@ public class UserFriendController {
     }
 
 
+    @GetMapping("/checkfriend/{username}")
+    public ResponseEntity<?> checkFriendStatus(@PathVariable String username){
+
+        if(username ==null){
+            return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
+        }
+        User userfriend=usersserviceimpl.getUserByUserName(username);
+
+        if(userfriend==null){
+            return new ResponseEntity<>("this username not exit ", HttpStatus.NOT_FOUND);
+        }
+
+        String  currentUser= SecurityContextHolder.getContext().getAuthentication().getName();
+             boolean checkfriend=userFriendshipService.checkFriendStatus(currentUser,username);
+
+               if(checkfriend==false){
+                   return new ResponseEntity<>("this person are not friend of user ",HttpStatus.NOT_FOUND);
+               }
+
+        return new ResponseEntity<>("this user are friend of each other",HttpStatus.OK);
+    }
+
+
+
 }
