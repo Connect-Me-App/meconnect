@@ -153,6 +153,12 @@ public class UserFriendshipService {
          users.setIs_active(user.getIs_active());
          users.setIsonline(user.getIsonline());
          users.setProfileurl(user.getProfileurl());
+         users.setLast_login(user.getLast_login());
+         users.setRegistered_at(user.getRegistered_at());
+         users.setUpdated_by(user.getUpdated_by());
+         users.setUpdation_dt(user.getUpdation_dt());
+         users.setCreation_dt(user.getCreation_dt());
+         users.setCreated_by(user.getCreated_by());
 
          return users;
      }

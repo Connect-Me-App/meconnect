@@ -49,6 +49,12 @@ public class Usersserviceimpl implements Usersservice {
          usersEntity.setIs_active(false);
         usersEntity.setPasswordHash(user.getPasswordHash());
         usersEntity.setUsername(user.getUsername());
+        usersEntity.setLast_login(user.getLast_login());
+        usersEntity.setRegistered_at(user.getRegistered_at());
+        usersEntity.setUpdated_by(user.getUpdated_by());
+        usersEntity.setUpdation_dt(user.getUpdation_dt());
+        usersEntity.setCreation_dt(user.getCreation_dt());
+        usersEntity.setCreated_by(user.getCreated_by());
         Date registerDate = new Date();
         usersEntity.setRegistered_at(registerDate);
         User user2= userRepository.save(usersEntity);
@@ -216,6 +222,22 @@ public class Usersserviceimpl implements Usersservice {
             usersEntity.setIsonline(user.getIsonline());
         }
 
+        if(user.getLast_login()!=null) {
+            usersEntity.setLast_login(user.getLast_login());
+        }
+
+        if(user.getRegistered_at()!=null) {
+            usersEntity.setRegistered_at(user.getRegistered_at());
+        }
+
+        if(user.getCreation_dt()!=null) {
+            usersEntity.setCreation_dt(user.getCreation_dt());
+        }
+
+        if(user.getCreated_by()!=null) {
+            usersEntity.setCreated_by(user.getCreated_by());
+        }
+
         userRepository.save(usersEntity);
     }
 
@@ -244,6 +266,12 @@ public class Usersserviceimpl implements Usersservice {
            users.setIs_active(user.getIs_active());
            users.setIsonline(user.getIsonline());
            users.setProfileurl(user.getProfileurl());
+         users.setLast_login(user.getLast_login());
+         users.setRegistered_at(user.getRegistered_at());
+         users.setUpdated_by(user.getUpdated_by());
+         users.setUpdation_dt(user.getUpdation_dt());
+         users.setCreation_dt(user.getCreation_dt());
+         users.setCreated_by(user.getCreated_by());
 
           return users;
      }
