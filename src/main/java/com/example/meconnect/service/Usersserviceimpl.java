@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 //import com.meConnect2.meConnect2.entity.Usersentity;
@@ -56,6 +57,7 @@ public class Usersserviceimpl implements Usersservice {
         usersEntity.setCreation_dt(user.getCreation_dt());
         usersEntity.setCreated_by(user.getCreated_by());
         Date registerDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd / MM / yy");
         usersEntity.setRegistered_at(registerDate);
         User user2= userRepository.save(usersEntity);
 
