@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "c0e79e20-595c-4eb0-8243-61926bfc83a7",
+		"_postman_id": "20ef6bc4-1f32-4dc6-b294-0bee01b19144",
 		"name": "Meconnect",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -182,7 +182,7 @@
 					"query": [
 						{
 							"key": "",
-							"value": null,
+							"value": "",
 							"disabled": true
 						}
 					]
@@ -767,6 +767,64 @@
 				"header": [],
 				"url": {
 					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24. likesOnComment",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbkAzNjAiLCJleHAiOjE2NDYwNjQyODEsImlhdCI6MTY0NjAyODI4MX0.VBswwdChOGvNxmSVD-ujmuAvIsxEq4zONB9QUi-Pny4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n  \"liketype\": 1,\n  \"commentId\":1\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/likeCommentdata/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"likeCommentdata",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "25 set Offline User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setIsOfflineUser/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setIsOfflineUser",
+						""
+					]
 				}
 			},
 			"response": []

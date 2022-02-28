@@ -298,6 +298,26 @@ public class Usersserviceimpl implements Usersservice {
     }
 
 
+    public int updateisloginoffline(String username){
+         User user=getUserByUserName(username);
+           if(user==null){
+               return 0;
+           }
+           user.setIsonline(0);
+           userRepository.save(user);
+        return 1;
+    }
+
+    public int updateisloginOnline(String username){
+        User user=getUserByUserName(username);
+        if(user==null){
+            return 0;
+        }
+        user.setIsonline(1);
+        userRepository.save(user);
+        return 1;
+    }
+
     public User updatePassword(User user, String password) {
         user.setPasswordHash(password);
         return userRepository.save(user);

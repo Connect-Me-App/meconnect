@@ -20,6 +20,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.core.Response;
+
 //import com.meConnect2.meConnect2.entity.Usersentity;
 //import com.meConnect2.meConnect2.model.AuthenticateRequest;
 //import com.meConnect2.meConnect2.model.AuthenticationResponse;
@@ -63,6 +65,7 @@ public class UserController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         String jwt = jwtUtil.generateToken(userDetails);
 
+        setIsOnlineUser();
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
 
@@ -199,5 +202,25 @@ public class UserController {
         return new ResponseEntity<>("username available ", HttpStatus.OK);
     }
 
+
+    @GetMapping("/setIsOfflineUser/")
+    public ResponseEntity<?>  setIsOfflineUser(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+             int checklogout=usersserviceimpl.updateisloginoffline(username);
+              if(checklogout==0){
+                  return new ResponseEntity<>(0, HttpStatus.NOT_MODIFIED);
+              }
+        return new ResponseEntity<>(1, HttpStatus.OK);
+    }
+    
+    @GetMapping("/setIsOnlineUser/")
+    public ResponseEntity<?> setIsOnlineUser(){
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        int checklogout=usersserviceimpl.updateisloginOnline(username);
+        if(checklogout==0){
+            return new ResponseEntity<>(0, HttpStatus.NOT_MODIFIED);
+        }
+        return new ResponseEntity<>(1, HttpStatus.OK);
+    }
 
 }

@@ -1,26 +1,24 @@
 package com.example.meconnect.service;
 
-import com.example.meconnect.entity.Likes;
-import com.example.meconnect.entity.Post;
-import com.example.meconnect.entity.User;
+import com.example.meconnect.entity.*;
+import com.example.meconnect.model.LikeCommentRequest;
 import com.example.meconnect.model.LikeRequest;
-import com.example.meconnect.repository.LikesRepository;
-import com.example.meconnect.repository.PostRepo;
-import com.example.meconnect.repository.UserRepository;
+import com.example.meconnect.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
 @Service
-public class LikesService {
+public class LikesCommentService {
 
     @Autowired
-    PostRepo postrepo;
+    CommentRepo commentRepo;
 
     @Autowired
-    LikesRepository likesRepository;
+    LikesCommentRepository likesCommentRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -28,11 +26,13 @@ public class LikesService {
     @Autowired
     NotificationService notificationService;
 
-    public Post save(LikeRequest likedata) throws Exception {
-        if (likedata.getPostid() == null) {
+    public Comment save(LikeCommentRequest likedata) throws Exception {
+
+        if (likedata.getCommentId() == null) {
             throw new Exception("postid cannot be null");
         }
-        Optional<Post> post = postrepo.findById(likedata.getPostid());
+
+        Optional<Comment> comment = commentRepo.findById(likedata.getCommentId());
 
 //		    if(post.isEmpty()) {
 //		    	throw new Exception("postid not exit in database "+likedata.getPostid());
@@ -40,7 +40,8 @@ public class LikesService {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByUsername(username);
-        Optional<Likes> like = likesRepository.findTopByPostAndUserOrderByIdDesc(post.get(), user);
+        Optional<LikesComment> like=likesCommentRepository.findTopByCommentAndUserOrderByIdDesc(comment.get(),user);
+
 
         if (like.isPresent() && like.get().getLikeType() == likedata.getLiketype()) {
             throw new Exception(" you already from the operation " + likedata);
@@ -48,25 +49,25 @@ public class LikesService {
 
 
         if (likedata.getLiketype() == 1) {
-            post.get().setLikeCount(post.get().getLikeCount() + 1);
+            comment.get().setLikes_count(comment.get().getLikes_count() + 1);
         } else {
-            post.get().setLikeCount(post.get().getLikeCount() - 1);
+            comment.get().setLikes_count(comment.get().getLikes_count() - 1);
         }
 
 
-        postrepo.save(post.get());
+        commentRepo.save(comment.get());
 
-        Likes likesavedata = new Likes();
-        likesavedata.setPost(post.get());
+        LikesComment likesavedata = new LikesComment();
+        likesavedata.setComment(comment.get());
         likesavedata.setUser(user);
         likesavedata.setLikeType(likedata.getLiketype());
+
         if (like.isPresent()) {
             likesavedata.setId(like.get().getId());
         }
-        likesRepository.save(likesavedata);
+        likesCommentRepository.save(likesavedata);
 
-        notificationService.insertNotification("LIKE_ON_POST", likesavedata.getUser().getUsername(), likesavedata.getPost().getPostId(), likesavedata.getCreatedAt());
-        return post.get();
+        return comment.get();
     }
 
 

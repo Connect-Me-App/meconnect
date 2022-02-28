@@ -1,9 +1,6 @@
 package com.example.meconnect.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,12 +9,14 @@ import java.sql.Timestamp;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Likes {
+@ToString
+public class LikesComment {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -26,8 +25,8 @@ public class Likes {
     private int likeType;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
-    private Post post;
+    @JoinColumn(name = "comment_id", referencedColumnName = "id")
+    private Comment comment;
 
     @ManyToOne
     @JoinColumn(name = "user_name", referencedColumnName = "username")
@@ -46,3 +45,4 @@ public class Likes {
     private Timestamp updatedAt;
 
 }
+
