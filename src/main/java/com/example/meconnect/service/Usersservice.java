@@ -19,7 +19,10 @@ public interface Usersservice {
     User getUserByUserName(String username);
 
     List<User> getUser();
+
     VerificationToken verification(String token);
-    void updateuser(Users user, Long id);
+
+    void updateuser(Users user, String username);
+
     public void deleteToken(String token);
 }

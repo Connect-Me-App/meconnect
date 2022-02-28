@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
 
-//    @Query(value = "SELECT * FROM user_post WHERE isDeleted = 0 ",nativeQuery = true)
+    //    @Query(value = "SELECT * FROM user_post WHERE isDeleted = 0 ",nativeQuery = true)
     List<Post> findAllByIsDeletedFalse();
 
     Post save(Post post);
@@ -25,6 +25,6 @@ public interface PostRepo extends JpaRepository<Post, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE user_post p SET p.is_deleted = 1 WHERE  p.id = ?2 AND p.user_name = ?1",nativeQuery = true)
-    void deleteByUserNameAndPostId(String username,Long postId);
+    @Query(value = "UPDATE user_post p SET p.is_deleted = 1 WHERE  p.id = ?2 AND p.user_name = ?1", nativeQuery = true)
+    void deleteByUserNameAndPostId(String username, Long postId);
 }

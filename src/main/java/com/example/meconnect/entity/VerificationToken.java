@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.Instant;
 
-import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -16,7 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="TokenSystem")
+@Table(name = "TokenSystem")
 public class VerificationToken {
     @Id
     @GeneratedValue(strategy = IDENTITY)

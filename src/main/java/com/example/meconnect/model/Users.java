@@ -2,7 +2,6 @@ package com.example.meconnect.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import java.util.Date;
 
 
@@ -29,16 +28,16 @@ public class Users {
     private Date updation_dt;
     private String created_by;
     private String updated_by;
-     private String city;
-     private String  education;
-     private  String dob;
-     private String country;
-     private String aboutyou;
+    private String city;
+    private String education;
+    private String dob;
+    private String country;
+    private String aboutyou;
     private String profileurl;
     private int isonline;
 
 
-//    public Users(Long id, String first_name, String middle_name, String last_name, String username, String mobile_no,
+    //    public Users(Long id, String first_name, String middle_name, String last_name, String username, String mobile_no,
 //                 String email, String passwordHash, Date registered_at, Date last_login, String address, Boolean is_active,
 //                 Date creation_dt, Date updation_dt, String created_by, String updated_by) {
 //        super();

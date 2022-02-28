@@ -9,8 +9,10 @@ import com.example.meconnect.repository.PostRepo;
 import com.example.meconnect.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,18 +44,21 @@ public class PostService {
 
     public List<PostResponse> getAllPostsByUsername(String username) {
         User user = userRepository.findUserByUsername(username);
+        if (user == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Username doesn't exist");
         return postRepo.findByUser(user)
                 .stream()
                 .map(postMapper::mapToDto)
                 .collect(Collectors.toList());
     }
 
-    public void deletePost(String username,Long postId) {
-        postRepo.deleteByUserNameAndPostId(username,postId);
+    public void deletePost(String username, Long postId) {
+        if (postId == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post doesn't exist");
+        postRepo.deleteByUserNameAndPostId(username, postId);
     }
 
-    public Post getPostByPostId(Long postId){
+    public Post getPostByPostId(Long postId) {
         Post post = postRepo.findByPostIdAndIsDeletedFalse(postId);
+        if (postId == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Post doesn't exist");
         return post;
     }
 
