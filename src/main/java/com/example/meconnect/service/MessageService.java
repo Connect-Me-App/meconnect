@@ -1,6 +1,5 @@
 package com.example.meconnect.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class MessageService {
     public void deleteMessage(long messageId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user=userRepository.findUserByUsername(username);
-        messageRepo.deleteBySenderIdAndMessageId(user.getId(),messageId);
+        messageRepo.deleteBysenderIdAndMessageId(user.getId(),messageId);
     }
 
     public void updateStatus(long to,long from) {
