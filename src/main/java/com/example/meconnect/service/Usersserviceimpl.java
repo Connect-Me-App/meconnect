@@ -8,6 +8,7 @@ import com.example.meconnect.repository.verificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +52,14 @@ public class Usersserviceimpl implements Usersservice {
         usersEntity.setIs_active(false);
         usersEntity.setPasswordHash(user.getPasswordHash());
         usersEntity.setUsername(user.getUsername());
+        usersEntity.setLast_login(user.getLast_login());
+        usersEntity.setRegistered_at(user.getRegistered_at());
+        usersEntity.setUpdated_by(user.getUpdated_by());
+        usersEntity.setUpdation_dt(user.getUpdation_dt());
+        usersEntity.setCreation_dt(user.getCreation_dt());
+        usersEntity.setCreated_by(user.getCreated_by());
         Date registerDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd / MM / yy");
         usersEntity.setRegistered_at(registerDate);
         User user2 = userRepository.save(usersEntity);
 
@@ -147,30 +155,94 @@ public class Usersserviceimpl implements Usersservice {
 
 
     @Override
-    public void updateuser(Users user, Long id) {
+    public void updateuser(Users user, String username) {
 
-        User usersEntity = new User();
-        usersEntity.setId(id);
-        usersEntity.setFirst_name(user.getFirst_name());
-        usersEntity.setMiddle_name(user.getMiddle_name());
-        usersEntity.setLast_name(user.getLast_name());
-        usersEntity.setAddress(user.getAddress());
-        usersEntity.setEmail(user.getEmail());
-        usersEntity.setMobile_no(user.getMobile_no());
-        usersEntity.setIs_active(user.getIs_active());
-        usersEntity.setPasswordHash(user.getPasswordHash());
-        usersEntity.setUsername(user.getUsername());
-        usersEntity.setCity(user.getCity());
-        usersEntity.setEducation(user.getEducation());
-        usersEntity.setAboutyou(user.getAboutyou());
-        usersEntity.setDob(user.getDob());
-        usersEntity.setCountry(user.getCountry());
-        usersEntity.setProfileurl(user.getProfileurl());
-        usersEntity.setIsonline(user.getIsonline());
+        User usersEntity = userRepository.findUserByUsername(username);
+
+        if (user.getUsername() != null) {
+            usersEntity.setFirst_name(user.getFirst_name());
+        }
+
+
+        if (user.getMiddle_name() != null) {
+            usersEntity.setMiddle_name(user.getMiddle_name());
+        }
+
+        if (user.getLast_name() != null) {
+            usersEntity.setLast_name(user.getLast_name());
+        }
+
+        if (user.getAddress() != null) {
+            usersEntity.setAddress(user.getAddress());
+        }
+
+        if (user.getEmail() != null) {
+            usersEntity.setEmail(user.getEmail());
+        }
+
+        if (user.getMobile_no() != null) {
+            usersEntity.setMobile_no(user.getMobile_no());
+        }
+
+        if (user.getIs_active() != null) {
+            usersEntity.setIs_active(user.getIs_active());
+        }
+
+        if (user.getPasswordHash() != null) {
+            usersEntity.setPasswordHash(user.getPasswordHash());
+        }
+
+        if (user.getUsername() != null) {
+            usersEntity.setUsername(user.getUsername());
+        }
+
+        if (user.getCity() != null) {
+            usersEntity.setCity(user.getCity());
+        }
+
+        if (user.getEducation() != null) {
+            usersEntity.setEducation(user.getEducation());
+        }
+
+        if (user.getAboutyou() != null) {
+            usersEntity.setAboutyou(user.getAboutyou());
+        }
+
+        if (user.getDob() != null) {
+            usersEntity.setDob(user.getDob());
+        }
+
+        if (user.getCountry() != null) {
+            usersEntity.setCountry(user.getCountry());
+        }
+
+        if (user.getProfileurl() != null) {
+            usersEntity.setProfileurl(user.getProfileurl());
+        }
+
+        if (user.getIsonline() != 0) {
+            usersEntity.setIsonline(user.getIsonline());
+        }
+
+        if (user.getLast_login() != null) {
+            usersEntity.setLast_login(user.getLast_login());
+        }
+
+        if (user.getRegistered_at() != null) {
+            usersEntity.setRegistered_at(user.getRegistered_at());
+        }
+
+        if (user.getCreation_dt() != null) {
+            usersEntity.setCreation_dt(user.getCreation_dt());
+        }
+
+        if (user.getCreated_by() != null) {
+            usersEntity.setCreated_by(user.getCreated_by());
+        }
 
         userRepository.save(usersEntity);
-
     }
+
 
     public Users getUserByusername(String username) {
         User user = userRepository.findUserByUsername(username);
@@ -196,6 +268,12 @@ public class Usersserviceimpl implements Usersservice {
         users.setIs_active(user.getIs_active());
         users.setIsonline(user.getIsonline());
         users.setProfileurl(user.getProfileurl());
+        users.setLast_login(user.getLast_login());
+        users.setRegistered_at(user.getRegistered_at());
+        users.setUpdated_by(user.getUpdated_by());
+        users.setUpdation_dt(user.getUpdation_dt());
+        users.setCreation_dt(user.getCreation_dt());
+        users.setCreated_by(user.getCreated_by());
 
         return users;
     }
