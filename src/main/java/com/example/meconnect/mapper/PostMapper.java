@@ -22,6 +22,7 @@ public class PostMapper {
                 .postImageURL(postRequest.getPostImageURL())
                 .postVideoURL(postRequest.getPostVideoURL())
                 .likeCount(0)
+                .commentCount(0)
                 .build();
     }
 
@@ -33,6 +34,7 @@ public class PostMapper {
                 .postImageUrl(post.getPostImageURL())
                 .postVideoUrl(post.getPostVideoURL())
                 .likeCount(post.getLikeCount())
+                .commentCount(post.getCommentCount())
                 .createdBy(post.getUser().getUsername())
                 .createdAt(post.getCreatedAt())
                 .updatedAt(post.getUpdatedAt())

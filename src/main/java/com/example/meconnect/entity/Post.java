@@ -40,9 +40,11 @@ public class Post {
     @Column(name = "post_video_url")
     private String postVideoURL;
 
-
     @Column(name = "like_count")
     private int likeCount;
+
+    @Column(name = "comment_count")
+    private int commentCount;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

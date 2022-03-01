@@ -19,6 +19,7 @@ public class PostResponse {
     private String postImageUrl;
     private String postVideoUrl;
     private int likeCount;
+    private int commentCount;
     private String userName;
     private String createdBy;
     private Timestamp createdAt;
