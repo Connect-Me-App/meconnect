@@ -154,7 +154,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbmlrZXRAMzYwIiwiZXhwIjoxNjQ2MTQ4NDg4LCJpYXQiOjE2NDYxMTI0ODh9.9HENd6-rS8dF2C1jRNQjlkzbJ_21SwSeL2c3PvxJvAM",
 						"type": "text"
 					}
 				],
@@ -773,21 +773,18 @@
 		},
 		{
 			"name": "24. likesOnComment",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbkAzNjAiLCJleHAiOjE2NDYwNjQyODEsImlhdCI6MTY0NjAyODI4MX0.VBswwdChOGvNxmSVD-ujmuAvIsxEq4zONB9QUi-Pny4",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmF2ZWVuQDM2MCIsImV4cCI6MTY0NjE0OTM2NywiaWF0IjoxNjQ2MTEzMzY3fQ.fvY4IoUTBLX0uXjYwl9h4G1MjQ_PaCehZlqABJ5X20g",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\n  \"liketype\": 1,\n  \"commentId\":1\n    \n}",
+					"raw": "{\n\n  \"liketype\": 1,\n  \"commentId\":2\n    \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -795,15 +792,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/likeCommentdata/",
+					"raw": "http://localhost:8080/likeCommentdata",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"likeCommentdata",
-						""
+						"likeCommentdata"
 					]
 				}
 			},
@@ -824,6 +820,32 @@
 					"path": [
 						"setIsOfflineUser",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "26 getalluser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbnNodUAzNjAiLCJleHAiOjE2NDUxMzcwMjksImlhdCI6MTY0NTEwMTAyOX0.PyfQ1q2PqAD_ElfnfkiZ9_gRVXb-ziXTiIK__yaAPus",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/getalluser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getalluser"
 					]
 				}
 			},

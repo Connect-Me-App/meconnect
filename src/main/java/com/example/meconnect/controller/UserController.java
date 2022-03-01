@@ -65,7 +65,7 @@ public class UserController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         String jwt = jwtUtil.generateToken(userDetails);
 
-        setIsOnlineUser();
+        setIsOnlineUser(authenticationRequest.getUsername());
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
 
@@ -212,15 +212,20 @@ public class UserController {
               }
         return new ResponseEntity<>(1, HttpStatus.OK);
     }
-    
+
     @GetMapping("/setIsOnlineUser/")
-    public ResponseEntity<?> setIsOnlineUser(){
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        int checklogout=usersserviceimpl.updateisloginOnline(username);
+    public ResponseEntity<?> setIsOnlineUser(String username2){
+
+        int checklogout=usersserviceimpl.updateisloginOnline(username2);
+
+        //System.out.println("*************+"+username2 +" setisonline *****"+ checklogout);
+
         if(checklogout==0){
             return new ResponseEntity<>(0, HttpStatus.NOT_MODIFIED);
         }
         return new ResponseEntity<>(1, HttpStatus.OK);
     }
+
+
 
 }

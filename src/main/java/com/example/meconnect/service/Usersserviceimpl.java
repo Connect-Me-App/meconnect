@@ -310,9 +310,9 @@ public class Usersserviceimpl implements Usersservice {
 
     public int updateisloginOnline(String username){
         User user=getUserByUserName(username);
-        if(user==null){
+         if(user==null){
             return 0;
-        }
+         }
         user.setIsonline(1);
         userRepository.save(user);
         return 1;

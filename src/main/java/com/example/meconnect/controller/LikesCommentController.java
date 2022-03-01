@@ -19,7 +19,7 @@ public class LikesCommentController {
     @Autowired
     private LikesCommentService likesCommentService;
 
-    @PostMapping("/likeCommentdata/")
+    @PostMapping("/likeCommentdata")
     public ResponseEntity<?> like(@RequestBody LikeCommentRequest likesdto) {
         Comment comment = null;
 
