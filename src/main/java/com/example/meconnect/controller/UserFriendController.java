@@ -116,8 +116,10 @@ public class UserFriendController {
         if (username == null) {
             return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
         }
-        User userfriend = usersserviceimpl.getUserByUserName(username);
 
+        String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userfriend = usersserviceimpl.getUserByUserName(username);
+       // User userfriend = usersserviceimpl.getUserByUserName(currentUser);
         if (userfriend == null) {
             return new ResponseEntity<>("this username not exit ", HttpStatus.NOT_FOUND);
         }
@@ -139,6 +141,8 @@ public class UserFriendController {
         if (userfriend == null) {
             return new ResponseEntity<>("this username not exit ", HttpStatus.NOT_FOUND);
         }
+
+        String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
 
         List<Users> users = userFriendshipService.notAccptedUserRequest(username);
 
@@ -171,5 +175,20 @@ public class UserFriendController {
     }
 
 
+    @GetMapping("/RequestSendOrNot/{username}")
+     public ResponseEntity<?>  checkRequestSendOrNot(@PathVariable String username){
+
+         if (username == null) {
+             return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
+         }
+
+         int checkStatus=userFriendshipService.checkRequestSendOrNot(username);
+
+         if ( checkStatus ==0) {
+             return new ResponseEntity<>(0, HttpStatus.OK);
+         }
+
+         return new ResponseEntity<>(1, HttpStatus.OK);
+     }
 
 }

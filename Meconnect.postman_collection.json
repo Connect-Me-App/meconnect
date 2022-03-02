@@ -850,6 +850,52 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "27 checkavailableusername",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/checkavailableusername/praveen@360",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"checkavailableusername",
+						"praveen@360"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "28 . checkRequestSendOrNot",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbnNodUAzNjAiLCJleHAiOjE2NDUxMzcwMjksImlhdCI6MTY0NTEwMTAyOX0.PyfQ1q2PqAD_ElfnfkiZ9_gRVXb-ziXTiIK__yaAPus",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/RequestSendOrNot/praveen@360",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"RequestSendOrNot",
+						"praveen@360"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

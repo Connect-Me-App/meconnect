@@ -91,11 +91,9 @@ public class UserFriendshipService {
 
         for (User_friends userfriendIter : userFriends) {
 
-            if (userfriendIter.getUserSender().getUsername().equals(username)) {
-                listofNotFriend.add(converterUserentity(userfriendIter.getUserReceiver()));
-            } else {
+            if (userfriendIter.getUserReceiver().getUsername().equals(username)) {
                 listofNotFriend.add(converterUserentity(userfriendIter.getUserSender()));
-            }
+           }
 
         }
 
@@ -114,8 +112,6 @@ public class UserFriendshipService {
 
             if (userfriendIter.getUserSender().getUsername().equals(username)) {
                 listofNotFriend.add(converterUserentity(userfriendIter.getUserReceiver()));
-            } else {
-                listofNotFriend.add(converterUserentity(userfriendIter.getUserSender()));
             }
 
         }
@@ -161,5 +157,18 @@ public class UserFriendshipService {
 
         return users;
     }
+
+
+     public int checkRequestSendOrNot(String username){
+           List<Users> listofRequest= notAccptedUserRequest(username);
+             Users user=usersserviceimpl.getUserByusername(username);
+
+                 if(listofRequest.contains(user)){
+                     return 1;
+                 }
+
+        return 0;
+     }
+
 
 }
