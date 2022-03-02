@@ -68,10 +68,10 @@ public class Usersserviceimpl implements Usersservice {
         String Token = generateVerificationToken(user2);
         System.out.println("*-------" + Token + "-------------*");
 
-        mailService.sendEmail(user2.getEmail(), "verifiy your account ",
-                "Thank you for signing up to meconnect \n" +
-                        " please click on the below url to activate your account : \n" +
-                        "                \"http://localhost:8080/auccountverification/\" " + Token);
+//        mailService.sendEmail(user2.getEmail(), "verifiy your account ",
+//                "Thank you for signing up to meconnect \n" +
+//                        " please click on the below url to activate your account : \n" +
+//                        "                \"http://localhost:8080/auccountverification/\" " + Token);
 
         return user2;
         //return userRepository.save(usersEntity);

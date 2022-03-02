@@ -44,9 +44,15 @@ public interface User_friendRepository extends JpaRepository<User_friends, Long>
 
 
     @Query(" select case when count(f)> 0 then true else false end from User_friends f  where " +
-            " ( f.userSender = :user AND f.userReceiver = :friend ) " +
-            " OR (f.userSender = :friend AND f.userReceiver = :user) " + " AND ( f.isfriend = true) ")
+            " ( ( f.userSender = :user AND f.userReceiver = :friend ) " +
+            " OR (f.userSender = :friend AND f.userReceiver = :user) ) " + " AND ( f.isfriend = true) ")
     boolean checkFriendStatus(@Param("user") User user, @Param("friend") User friend);
+
+
+//    @Query(" select case when count(f)==0 then true else false end from User_friends f  where " +
+//            " ( f.userSender = :user AND f.userReceiver = :friend ) " +
+//            " OR (f.userSender = :friend AND f.userReceiver = :user) " )
+//     boolean  deletefriendrequedst();
 
 }
 

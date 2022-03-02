@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,6 +24,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(name = "first_name")
     private String first_name;
 
@@ -32,15 +34,18 @@ public class User implements Serializable {
     @Column(name = "last_name")
     private String last_name;
 
-    @Column(name = "username")
+    @NotNull
+    @Column(name = "username",unique=true)
     private String username;
 
     @Column(name = "mobile_no")
     private String mobile_no;
 
+    @NotNull
     @Column(name = "email")
     private String email;
 
+    @NotNull
     @Column(name = "passwordHash")
     private String passwordHash;
 

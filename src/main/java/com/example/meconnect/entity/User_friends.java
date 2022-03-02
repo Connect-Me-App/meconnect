@@ -18,11 +18,11 @@ public class User_friends {
     Long id;
 
     @ManyToOne
-    @JoinColumn(name = "userSender")
+    @JoinColumn(name = "userSender",referencedColumnName="username")
     User userSender;
 
     @ManyToOne
-    @JoinColumn(name = "userReceiver")
+    @JoinColumn(name = "userReceiver",referencedColumnName="username")
     User userReceiver;
 
     @Column(name = "isfriend")

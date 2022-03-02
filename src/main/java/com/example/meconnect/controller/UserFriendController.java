@@ -161,12 +161,15 @@ public class UserFriendController {
         String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         boolean checkfriend = userFriendshipService.checkFriendStatus(currentUser, username);
 
+        System.out.println("***************check friend status  = "+ checkfriend);
+
         if (checkfriend == false) {
             return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(1, HttpStatus.OK);
     }
+
 
 
 }
