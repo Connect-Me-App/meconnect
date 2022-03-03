@@ -67,6 +67,7 @@ public class LikesCommentService {
         }
         likesCommentRepository.save(likesavedata);
 
+        notificationService.insertNotification("LIKE_ON_COMMENT", likesavedata.getUser().getUsername(), likesavedata.getComment().getPost().getPostId(), likesavedata.getCreatedAt());
         return comment.get();
     }
 
