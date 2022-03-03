@@ -36,7 +36,7 @@ public class PostService {
     }
 
     public List<PostResponse> getAllPosts() {
-        return postRepo.findAllByIsDeletedFalse()
+        return postRepo.getAllPost()
                 .stream()
                 .map(postMapper::mapToDto)
                 .collect(Collectors.toList());

@@ -15,16 +15,16 @@ public class User_friends {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "userSender",referencedColumnName="username")
-    User userSender;
+    @JoinColumn(name = "user_sender",referencedColumnName="username")
+    private User userSender;
 
     @ManyToOne
-    @JoinColumn(name = "userReceiver",referencedColumnName="username")
-    User userReceiver;
+    @JoinColumn(name = "user_receiver",referencedColumnName="username")
+    private User userReceiver;
 
-    @Column(name = "isfriend")
-    boolean isfriend;
+    @Column(name = "is_friend")
+    private boolean isfriend;
 }
