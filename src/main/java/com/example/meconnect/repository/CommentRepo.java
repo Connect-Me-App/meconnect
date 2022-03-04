@@ -22,6 +22,6 @@ public interface CommentRepo extends JpaRepository<Comment, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE comments c SET c.is_deleted = 1 WHERE c.user_name = ?1 AND c.id = ?3 AND c.post_id = ?2",nativeQuery = true)
+    @Query(value = "UPDATE comments c SET c.is_deleted = 1 WHERE c.user_name = ?1 AND c.id = ?3 AND c.post_id = ?2", nativeQuery = true)
     void deleteByCommentIdAndPostId(String username, Long postId, Long commentId);
 }

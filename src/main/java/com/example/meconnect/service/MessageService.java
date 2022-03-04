@@ -1,19 +1,18 @@
 package com.example.meconnect.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.meconnect.entity.Message;
 import com.example.meconnect.entity.User;
 import com.example.meconnect.mapper.MessageMapper;
-import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.meconnect.model.ChatDTO;
 import com.example.meconnect.repository.MessageRepo;
 import com.example.meconnect.repository.UserRepository;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,28 +23,31 @@ public class MessageService {
     @Autowired
     UserRepository userRepository;
 
+    public void updateStatus(long from, long to) {
+        this.messageRepo.updateStatusFromReadMessages(from,to);
+    }
+
     public void submitMessageToDB(ChatDTO chatDTO) {
-        Message message=messageMapper.mapChatDTOtoMessage(chatDTO);
+        Message message = messageMapper.mapChatDTOtoMessage(chatDTO);
         message.setIsDeleted(false);
         message.setIsRead(false);
         message.setCreatedBy(SecurityContextHolder.getContext().getAuthentication().getName());
-       // message.setCreatedAt(LocalDateTime.now());
-       // message.setSentAt(LocalDateTime.now());
         messageRepo.save(message);
     }
-    public List<ChatDTO> getExistingMessages(long senderId,long targetId){
-        List<Message> messages=messageRepo.getExistingMessages(senderId, targetId);
-        this.updateStatus(senderId,targetId);
-        return messageMapper.mapMessagesToChatDTO(messages);
-    }
-    public void deleteMessage(long messageId) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user=userRepository.findUserByUsername(username);
-        messageRepo.deleteBysenderIdAndMessageId(user.getId(),messageId);
+
+    public List<ChatDTO> getExistingMessages(Long senderId, Long targetId) {
+                  return messageRepo.findAllMessagesBetweenTwoUsers(senderId, targetId)
+                          .stream()
+                          .map(messageMapper::mapMessagesToChatDTO)
+                          .collect(Collectors.toList());
     }
 
-    public void updateStatus(long to,long from) {
-        messageRepo.updateStatusFromReadMessages(to, from);
-    }
+   public void deleteMessage(long messageId) {
+      String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findUserByUsername(username);
+      messageRepo.deleteMessagesBySenderIdAndMessageId(user.getId(), messageId);
+}
+
+
 
 }

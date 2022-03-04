@@ -26,26 +26,29 @@ public class PostController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<Void> createPost(@RequestBody PostRequest postRequest) {
+
+        System.out.println(" this is working fine line 30");
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         postRequest.setUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         postService.submitPostToDB(postRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<List<PostResponse>> retrieveAllPosts() {
+    public ResponseEntity<?> retrieveAllPosts() {
         return status(HttpStatus.OK).body(postService.getAllPosts());
     }
 
     @RequestMapping(value = "/by-user/{username}", method = RequestMethod.GET)
-    public ResponseEntity<List<PostResponse>> retrievePostByUsername(@PathVariable String username){
+    public ResponseEntity<List<PostResponse>> retrievePostByUsername(@PathVariable String username) {
         return status(HttpStatus.OK).body(postService.getAllPostsByUsername(username));
     }
 
-	@RequestMapping(value = "/{postId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deletePostById(@PathVariable Long postId){
+    @RequestMapping(value = "/{postId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deletePostById(@PathVariable Long postId) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		postService.deletePost(username,postId);
+        postService.deletePost(username, postId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+    }
 
 }

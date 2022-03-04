@@ -10,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
-import java.time.Instant;
 
 @Data
 @Entity
@@ -40,6 +39,7 @@ public class Post {
     @NotNull
     @Column(name = "post_video_url")
     private String postVideoURL;
+
 
     @Column(name = "like_count")
     private int likeCount;

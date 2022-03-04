@@ -1,289 +1,775 @@
 {
-	"info": {
-		"_postman_id": "701aa16a-13cf-4103-b1ba-3fb39a38cd99",
-		"name": "Meconnect",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Register",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbnNodTEyMyIsImV4cCI6MTY0NTA1Nzg0MiwiaWF0IjoxNjQ1MDIxODQyfQ.Juz2H_kOGdHbOvDmblVoJSj9oAAaJDcNByKVtUfr9hw",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"first_name\": \"Aryan\",\r\n    \"middle_name\": \"\",\r\n    \"last_name\": \"Gupta\",\r\n    \"username\": \"Aryan123\",\r\n    \"mobile_no\": \"9873626201\",\r\n    \"email\": \"aryangupta@gmail.com\",\r\n    \"passwordHash\": \"Aryan123\",\r\n    \"address\": \"Delhi\",\r\n    \"is_active\": 1\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "AuthenticateUser",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"Aryan123\",\r\n    \"password\": \"Aryan123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/authenticate",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"authenticate"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CreatePost",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"postText\":\"This is my 1st post\",\r\n    \"postImageURL\":\"dummy url\",\r\n    \"postVideoURL\":\"www.google.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/posts/create",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"posts",
-						"create"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": null,
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetAllPost",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/posts/all",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"posts",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetPostByUsername",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/posts/by-user/Aryan123",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"posts",
-						"by-user",
-						"Aryan123"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DeletePostById",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/posts/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"posts",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CreateComment",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"postId\":\"1\",\r\n    \"text\":\"this is my 4th comment\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/comments/create",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"comments",
-						"create"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetAllCommentsByPostId",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/comments/getAllComments/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"comments",
-						"getAllComments",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "DeleteCommentByPostIdAndCommentId",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "http://localhost:8080/api/comments/1/2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"comments",
-						"1",
-						"2"
-					]
-				}
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "_postman_id": "c0e79e20-595c-4eb0-8243-61926bfc83a7",
+    "name": "Meconnect",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "0. UpdatePassword",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n      \"username\": \"praveen@389\",\n      \"password\": \"anshu789\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/forgetPasswordUpdate/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "forgetPasswordUpdate",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "0. ForgetPassword",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/forgetPassword/praveen@389",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "forgetPassword",
+            "praveen@389"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "1. RegisterUser",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\n     \"id\":\"1\",\n   \"first_name\":\"praveen\",\n    \"middle_name\":\"\",\n   \"last_name\":\"kumar\",\n   \"username\":\"praveen@360\",\n    \"mobile_no\":\"9873626201\",\n   \"email\":\"anshu.jaiswal@peoplestrong.com\",\n   \"passwordHash\":\"ammar123\",\n   \"address\":\"123 govindpuri banglore\",\n   \"is_active\":0,\n    \"city\":\"Delhi\",\n    \"education\":\"DTU\",\n    \"dob\":\"18/05/1975\",\n    \"country\":\"INDIA\",\n    \"aboutyou\":\"i love to learn coding and new language and use to make a good project\",\n      \"profileurl\":\"imageurl/278b\",\n    \"isonline\":1\n }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2. TokenVerification",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbW1hbkAzNjAiLCJleHAiOjE2NDUxOTAyNzgsImlhdCI6MTY0NTE1NDI3OH0.rBRuCHXO8kKCkTpRzNzCkUlU8g3tyAG0PeLf1CDEC3Q",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/auccountToken/945789",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auccountToken",
+            "945789"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3. AuthenticateUser",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"username\": \"praveen@360\",\n    \"password\": \"anshu789\" \n}\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/authenticate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "authenticate"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4. CreatePost",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"postText\":\"This is my 1st post\",\r\n    \"postImageURL\":\"dummy url\",\r\n    \"postVideoURL\":\"www.google.com\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/create",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "create"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": null,
+              "disabled": true
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5. GetAllPost",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/posts/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6. GetPostByUsername",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/posts/by-user/Aryan123",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "by-user",
+            "Aryan123"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "7. DeletePostById",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/posts/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "8. CreateComment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"postId\":\"1\",\r\n    \"text\":\"this is my 4th comment\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/comments/create",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "comments",
+            "create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "9. GetAllCommentsByPostId",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/comments/getAllComments/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "comments",
+            "getAllComments",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "10. DeleteCommentByPostIdAndCommentId",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbjEyMyIsImV4cCI6MTY0NTA1OTAyMCwiaWF0IjoxNjQ1MDIzMDIwfQ.PBmscrn7Dl5YxaJX61dzPaPpphRdt5xHvHj_Rqu5SsY",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/comments/1/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "comments",
+            "1",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "11. SendFriendRequest",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaXBhbkAzNjAiLCJleHAiOjE2NDU3Mzk3MzMsImlhdCI6MTY0NTcwMzczM30.XhDpitWiJYKJj7aXppdrOgE2ZdDl9D2hr9TMSKgSMS8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/sendRequest/brij@360",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "sendRequest",
+            "brij@360"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "12. NotAcceptedFriendRequest",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaXBhbkAzNjAiLCJleHAiOjE2NDU3Mzk3MzMsImlhdCI6MTY0NTcwMzczM30.XhDpitWiJYKJj7aXppdrOgE2ZdDl9D2hr9TMSKgSMS8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/requestSendbyuser/dipan@360",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "requestSendbyuser",
+            "dipan@360"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "13. UserFriendPendingRequest",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaXBhbkAzNjAiLCJleHAiOjE2NDU3Mzk3MzMsImlhdCI6MTY0NTcwMzczM30.XhDpitWiJYKJj7aXppdrOgE2ZdDl9D2hr9TMSKgSMS8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/NotAcceptrequest/dipan@360",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "NotAcceptrequest",
+            "dipan@360"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "14. AcceptPendingRequest",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaXBhbkAzNjAiLCJleHAiOjE2NDU3MzM3NjksImlhdCI6MTY0NTY5Nzc2OX0.L4DBRj7YgfKeIv-TJtX2Hhu0QqVR4PR-gG2Z_MpXOjQ",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/acceptRequest/brij@360",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "acceptRequest",
+            "brij@360"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "15. DeleteFriend",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaXBhbkAzNjAiLCJleHAiOjE2NDU3MzUzMjIsImlhdCI6MTY0NTY5OTMyMn0.4NzdBF2UiSA5BabdlcNNR19GgJSAlDI3Va6bLEo3iz4",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/deletefriend/brij@360",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "deletefriend",
+            "brij@360"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "16. GetAllFriends",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkaXBhbkAzNjAiLCJleHAiOjE2NDU3Mzk3MzMsImlhdCI6MTY0NTcwMzczM30.XhDpitWiJYKJj7aXppdrOgE2ZdDl9D2hr9TMSKgSMS8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/getfriend/dipan@360",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "getfriend",
+            "dipan@360"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "17. CheckFriendStatus",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/checkfriend/dipan@360",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "checkfriend",
+            "dipan@360"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "18. GetAllNotifications",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbkAzNjAiLCJleHAiOjE2NDYwNjQyODEsImlhdCI6MTY0NjAyODI4MX0.VBswwdChOGvNxmSVD-ujmuAvIsxEq4zONB9QUi-Pny4",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/notification/allNotifications",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "notification",
+            "allNotifications"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "19. LikeAPost",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBcnlhbkAzNjAiLCJleHAiOjE2NDYwNjQyODEsImlhdCI6MTY0NjAyODI4MX0.VBswwdChOGvNxmSVD-ujmuAvIsxEq4zONB9QUi-Pny4",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\n  \"liketype\": 1,\n   \"postid\": 1\n    \n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/likedata/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "likedata",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "20. GetAllUsers",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbnNodUAzNjAiLCJleHAiOjE2NDUxMzcwMjksImlhdCI6MTY0NTEwMTAyOX0.PyfQ1q2PqAD_ElfnfkiZ9_gRVXb-ziXTiIK__yaAPus",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/getalluser",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "getalluser"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "21. FindUserByUserName",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmF2ZWVuQDM2MCIsImV4cCI6MTY0NTQ3MzI2NSwiaWF0IjoxNjQ1NDM3MjY1fQ.v1DkNwgRmlCvsnmp6JFxefdGMnjpiokxn03BoU8IRmM",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/getUser/praveen@360",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "getUser",
+            "praveen@360"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "22. UpdateUserDetails",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbW1hckAzNjAiLCJleHAiOjE2NDQ1OTI0MDQsImlhdCI6MTY0NDU1NjQwNH0.kjNmUJ-RNiygl8QU9h8DGgoTg6R1uo1xWcsQ4ZYd1Ug",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n        \"first_name\": \"Anshu\",\n        \"middle_name\": \"\",\n        \"last_name\": \"Jaiswal\",\n        \"username\": \"anshu@360\",\n        \"mobile_no\": \"9717669254\",\n        \"email\": \"anshu@gmail.com\",\n        \"passwordHash\": \"anshu123\",\n        \"registered_at\": \"2022-02-10T12:21:32.703+00:00\",\n        \"last_login\": \"2022-02-10T12:21:32.806+00:00\",\n        \"address\": \"12 govindpuri new delhi\",\n        \"is_active\": true,\n        \"creation_dt\": \"2022-02-10T12:21:32.806+00:00\",\n        \"updation_dt\": \"2022-02-10T12:21:32.806+00:00\",\n        \"created_by\": null,\n        \"updated_by\": null\n    },",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/updateuser/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "updateuser",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "23. DeleteUserByUsername",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ]
 }
