@@ -26,6 +26,7 @@ public class UserFriendshipService {
         User currentUser = usersserviceimpl.getUserByUserName(currentUsername);
         User friendUser = usersserviceimpl.getUserByUserName(friendusername);
 
+
         User_friends user_friends = new User_friends();
         user_friends.setUserSender(currentUser);
         user_friends.setUserReceiver(friendUser);
@@ -36,6 +37,14 @@ public class UserFriendshipService {
         return user_friends;
     }
 
+
+     public boolean checkRequestPresentOrNot(String currentUsername, String friendusername){
+         User currentUser = usersserviceimpl.getUserByUserName(currentUsername);
+         User friendUser = usersserviceimpl.getUserByUserName(friendusername);
+          boolean chek=user_friendRepository.checkRequestPresentOrNot(currentUser,friendUser);
+
+        return chek;
+     }
 
     public User_friends acceptFriend(String currentUsername, String friendusername) {
 

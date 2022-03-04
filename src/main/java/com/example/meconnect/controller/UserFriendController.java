@@ -32,11 +32,19 @@ public class UserFriendController {
             return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
         }
         User userfriend = usersserviceimpl.getUserByUserName(username);
+
         if (userfriend == null) {
             return new ResponseEntity<>("this username not exit ", HttpStatus.NOT_FOUND);
         }
 
         String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+
+
+//        boolean check=userFriendshipService.checkRequestPresentOrNot(currentUser,username);
+//
+//        if (check==true) {
+//            return new ResponseEntity<>("friend request already send ", HttpStatus.NOT_FOUND);
+//        }
 
         User_friends user_Friendsentity = userFriendshipService.addtofriend(currentUser, username);
 

@@ -6,8 +6,10 @@ import com.example.meconnect.model.Users;
 import com.example.meconnect.repository.UserRepository;
 import com.example.meconnect.repository.verificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.beans.Encoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +33,9 @@ public class Usersserviceimpl implements Usersservice {
     @Autowired
     private verificationTokenRepository verificationTokenRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User saveUser(Users user) {
         // TODO Auto-generated method stub
@@ -50,7 +55,8 @@ public class Usersserviceimpl implements Usersservice {
         usersEntity.setCountry(user.getCountry());
         //usersEntity.setIs_active(user.getIs_active());
         usersEntity.setIs_active(false);
-        usersEntity.setPasswordHash(user.getPasswordHash());
+       // usersEntity.setPasswordHash(user.getPasswordHash());
+         usersEntity.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
         usersEntity.setUsername(user.getUsername());
         usersEntity.setLast_login(user.getLast_login());
         usersEntity.setRegistered_at(user.getRegistered_at());
@@ -159,7 +165,7 @@ public class Usersserviceimpl implements Usersservice {
 
         User usersEntity = userRepository.findUserByUsername(username);
 
-        if (user.getUsername() != null) {
+        if (user.getFirst_name()!= null) {
             usersEntity.setFirst_name(user.getFirst_name());
         }
 
@@ -189,7 +195,7 @@ public class Usersserviceimpl implements Usersservice {
         }
 
         if (user.getPasswordHash() != null) {
-            usersEntity.setPasswordHash(user.getPasswordHash());
+            usersEntity.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
         }
 
         if (user.getUsername() != null) {
