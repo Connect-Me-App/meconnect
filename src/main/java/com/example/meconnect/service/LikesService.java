@@ -29,9 +29,11 @@ public class LikesService {
     NotificationService notificationService;
 
     public Post save(LikeRequest likedata) throws Exception {
+
         if (likedata.getPostid() == null) {
             throw new Exception("postid cannot be null");
         }
+
         Optional<Post> post = postrepo.findById(likedata.getPostid());
 
 //		    if(post.isEmpty()) {
@@ -69,5 +71,15 @@ public class LikesService {
         return post.get();
     }
 
+
+    public boolean checklikeorNot(LikeRequest likedata){
+
+        Optional<Post> post = postrepo.findById(likedata.getPostid());
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findUserByUsername(username);
+        Optional<Likes> like = likesRepository.findTopByPostAndUserOrderByIdDesc(post.get(), user);
+
+        return likesRepository.checkAlreadyLikeOrNot(post.get(),user);
+    }
 
 }

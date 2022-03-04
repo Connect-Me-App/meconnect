@@ -896,6 +896,43 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "29 . checkpostisalreadylikeorNot",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbnNodUAzNjAiLCJleHAiOjE2NDUxMzcwMjksImlhdCI6MTY0NTEwMTAyOX0.PyfQ1q2PqAD_ElfnfkiZ9_gRVXb-ziXTiIK__yaAPus",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n   \"postid\": 1\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/alreadylikeOrNot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"alreadylikeOrNot"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
