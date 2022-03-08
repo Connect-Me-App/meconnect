@@ -72,14 +72,14 @@ public class LikesService {
     }
 
 
-    public boolean checklikeorNot(LikeRequest likedata){
+    public boolean checklikeorNot(LikeRequest likedata) {
 
         Optional<Post> post = postrepo.findById(likedata.getPostid());
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByUsername(username);
         Optional<Likes> like = likesRepository.findTopByPostAndUserOrderByIdDesc(post.get(), user);
 
-        return likesRepository.checkAlreadyLikeOrNot(post.get(),user);
+        return likesRepository.checkAlreadyLikeOrNot(post.get(), user);
     }
 
 }

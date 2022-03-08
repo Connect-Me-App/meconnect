@@ -20,8 +20,8 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
     Optional<Likes> findTopByPostAndUserOrderByIdDesc(Post post, User currentUser);
 
 
-    @Query(value =" select case when count(f)> 0 then true else false end from Likes f  where " +
-            "  ( f.post = :post AND f.user = :user ) " + " AND ( f.likeType = 1 ) " )
+    @Query(value = " select case when count(f)> 0 then true else false end from Likes f  where " +
+            "  ( f.post = :post AND f.user = :user ) " + " AND ( f.likeType = 1 ) ")
     boolean checkAlreadyLikeOrNot(@Param("post") Post post, @Param("user") User user);
 
 }

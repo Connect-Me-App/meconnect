@@ -1,11 +1,8 @@
 package com.example.meconnect.controller;
 
 import com.example.meconnect.entity.Comment;
-import com.example.meconnect.entity.Post;
 import com.example.meconnect.model.LikeCommentRequest;
-import com.example.meconnect.model.LikeRequest;
 import com.example.meconnect.service.LikesCommentService;
-import com.example.meconnect.service.LikesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

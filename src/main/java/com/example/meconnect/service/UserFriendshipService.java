@@ -38,13 +38,13 @@ public class UserFriendshipService {
     }
 
 
-     public boolean checkRequestPresentOrNot(String currentUsername, String friendusername){
-         User currentUser = usersserviceimpl.getUserByUserName(currentUsername);
-         User friendUser = usersserviceimpl.getUserByUserName(friendusername);
-          boolean chek=user_friendRepository.checkRequestPresentOrNot(currentUser,friendUser);
+    public boolean checkRequestPresentOrNot(String currentUsername, String friendusername) {
+        User currentUser = usersserviceimpl.getUserByUserName(currentUsername);
+        User friendUser = usersserviceimpl.getUserByUserName(friendusername);
+        boolean chek = user_friendRepository.checkRequestPresentOrNot(currentUser, friendUser);
 
         return chek;
-     }
+    }
 
     public User_friends acceptFriend(String currentUsername, String friendusername) {
 
@@ -102,7 +102,7 @@ public class UserFriendshipService {
 
             if (userfriendIter.getUserReceiver().getUsername().equals(username)) {
                 listofNotFriend.add(converterUserentity(userfriendIter.getUserSender()));
-           }
+            }
 
         }
 
@@ -168,16 +168,16 @@ public class UserFriendshipService {
     }
 
 
-     public int checkRequestSendOrNot(String username){
-           List<Users> listofRequest= notAccptedUserRequest(username);
-             Users user=usersserviceimpl.getUserByusername(username);
+    public int checkRequestSendOrNot(String username) {
+        List<Users> listofRequest = notAccptedUserRequest(username);
+        Users user = usersserviceimpl.getUserByusername(username);
 
-                 if(listofRequest.contains(user)){
-                     return 1;
-                 }
+        if (listofRequest.contains(user)) {
+            return 1;
+        }
 
         return 0;
-     }
+    }
 
 
 }

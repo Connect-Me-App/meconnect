@@ -57,10 +57,10 @@ public class JwtUtil {
 
     public String logoutToken(String token) {
         final Date createdDate = new Date();
-       // final Date expirationDate = calculateExpirationDate(createdDate);
+        // final Date expirationDate = calculateExpirationDate(createdDate);
 
         final Claims claims = extractAllClaims(token);
-       // claims.setIssuedAt(createdDate);
+        // claims.setIssuedAt(createdDate);
         claims.setExpiration(createdDate);
 
         return Jwts.builder().setClaims(claims).signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();

@@ -36,7 +36,8 @@ public class PostService {
     }
 
     public List<PostResponse> getAllPosts() {
-        return postRepo.getAllPost()
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return postRepo.getAllPost(username)
                 .stream()
                 .map(postMapper::mapToDto)
                 .collect(Collectors.toList());

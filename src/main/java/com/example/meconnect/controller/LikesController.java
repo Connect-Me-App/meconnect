@@ -32,20 +32,18 @@ public class LikesController {
     }
 
 
+    @GetMapping("/alreadylikeOrNot")
+    public ResponseEntity<?> likeAlreadyorNot(@RequestBody LikeRequest likesdto) {
 
+        if (likesdto.getPostid() == null) {
+            return new ResponseEntity<>("please send the post id ", HttpStatus.NOT_FOUND);
+        }
 
-    @GetMapping ("/alreadylikeOrNot")
-    public ResponseEntity<?> likeAlreadyorNot(@RequestBody LikeRequest likesdto){
+        boolean check = likeService.checklikeorNot(likesdto);
 
-           if(likesdto.getPostid()==null){
-               return  new ResponseEntity<>("please send the post id ", HttpStatus.NOT_FOUND);
-           }
-
-           boolean check =likeService.checklikeorNot(likesdto);
-
-            if(check==false){
-                return new ResponseEntity<>(0, HttpStatus.OK);
-            }
+        if (check == false) {
+            return new ResponseEntity<>(0, HttpStatus.OK);
+        }
 
         return new ResponseEntity<>(1, HttpStatus.OK);
     }

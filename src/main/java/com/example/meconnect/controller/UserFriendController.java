@@ -127,7 +127,7 @@ public class UserFriendController {
 
         String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         User userfriend = usersserviceimpl.getUserByUserName(username);
-       // User userfriend = usersserviceimpl.getUserByUserName(currentUser);
+        // User userfriend = usersserviceimpl.getUserByUserName(currentUser);
         if (userfriend == null) {
             return new ResponseEntity<>("this username not exit ", HttpStatus.NOT_FOUND);
         }
@@ -173,7 +173,7 @@ public class UserFriendController {
         String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         boolean checkfriend = userFriendshipService.checkFriendStatus(currentUser, username);
 
-        System.out.println("***************check friend status  = "+ checkfriend);
+        System.out.println("***************check friend status  = " + checkfriend);
 
         if (checkfriend == false) {
             return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
@@ -184,19 +184,19 @@ public class UserFriendController {
 
 
     @GetMapping("/RequestSendOrNot/{username}")
-     public ResponseEntity<?>  checkRequestSendOrNot(@PathVariable String username){
+    public ResponseEntity<?> checkRequestSendOrNot(@PathVariable String username) {
 
-         if (username == null) {
-             return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
-         }
+        if (username == null) {
+            return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
+        }
 
-         int checkStatus=userFriendshipService.checkRequestSendOrNot(username);
+        int checkStatus = userFriendshipService.checkRequestSendOrNot(username);
 
-         if ( checkStatus ==0) {
-             return new ResponseEntity<>(0, HttpStatus.OK);
-         }
+        if (checkStatus == 0) {
+            return new ResponseEntity<>(0, HttpStatus.OK);
+        }
 
-         return new ResponseEntity<>(1, HttpStatus.OK);
-     }
+        return new ResponseEntity<>(1, HttpStatus.OK);
+    }
 
 }

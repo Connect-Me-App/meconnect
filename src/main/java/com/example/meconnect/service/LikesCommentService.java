@@ -1,9 +1,12 @@
 package com.example.meconnect.service;
 
-import com.example.meconnect.entity.*;
+import com.example.meconnect.entity.Comment;
+import com.example.meconnect.entity.LikesComment;
+import com.example.meconnect.entity.User;
 import com.example.meconnect.model.LikeCommentRequest;
-import com.example.meconnect.model.LikeRequest;
-import com.example.meconnect.repository.*;
+import com.example.meconnect.repository.CommentRepo;
+import com.example.meconnect.repository.LikesCommentRepository;
+import com.example.meconnect.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -40,7 +43,7 @@ public class LikesCommentService {
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findUserByUsername(username);
-        Optional<LikesComment> like=likesCommentRepository.findTopByCommentAndUserOrderByIdDesc(comment.get(),user);
+        Optional<LikesComment> like = likesCommentRepository.findTopByCommentAndUserOrderByIdDesc(comment.get(), user);
 
 
         if (like.isPresent() && like.get().getLikeType() == likedata.getLiketype()) {

@@ -68,8 +68,7 @@ public class NotificationService {
             notification.setCreatedAt(post.getCreatedAt());
             notification.setUpdatedAt(post.getUpdatedAt());
             notification.setIsRead(Boolean.FALSE);
-        }
-        else if (Objects.equals(type, "LIKE_ON_COMMENT")) {
+        } else if (Objects.equals(type, "LIKE_ON_COMMENT")) {
 
             notification.setUser(post.getUser());
             notification.setText(senderUserName + " has liked your comment.");

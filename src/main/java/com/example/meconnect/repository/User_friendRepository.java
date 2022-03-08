@@ -33,7 +33,6 @@ public interface User_friendRepository extends JpaRepository<User_friends, Long>
     List<User_friends> findFriend(@Param("user") User user);
 
 
-
     @Query("SELECT f FROM  User_friends f  WHERE ( f.userReceiver = :user) " +
             " AND ( f.isfriend = false)")
     List<User_friends> findNotacceptedRequest(@Param("user") User user);
@@ -52,7 +51,7 @@ public interface User_friendRepository extends JpaRepository<User_friends, Long>
 
     @Query(" select case when count(f)> 0 then true else false end from User_friends f  where " +
             "  ( f.userSender = :user AND f.userReceiver = :friend ) " + " AND ( f.isfriend = false ) ")
-       boolean checkRequestPresentOrNot(@Param("user") User user, @Param("friend") User friend);
+    boolean checkRequestPresentOrNot(@Param("user") User user, @Param("friend") User friend);
 
 //    @Query(" select case when count(f)==0 then true else false end from User_friends f  where " +
 //            " ( f.userSender = :user AND f.userReceiver = :friend ) " +
