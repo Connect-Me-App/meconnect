@@ -15,12 +15,12 @@ import java.util.List;
 public interface PostRepo extends JpaRepository<Post, Long> {
 
 
-    @Query(value = "SELECT p.* FROM user_post p JOIN friendship f ON ?1 = f.user_sender" +
-            " WHERE f.is_friend = 1 AND p.is_deleted=0" +
+    @Query(value = "SELECT p.* FROM user_post p WHERE p.user_name = ?1 UNION SELECT p.* FROM user_post p JOIN friendship f ON p.user_name = f.user_sender" +
+            " WHERE f.is_friend = 1 AND p.is_deleted=0 AND f.user_receiver = ?1" +
             " UNION" +
             " SELECT p.* FROM user_post p" +
-            " JOIN friendship f ON ?1 = f.user_receiver" +
-            " WHERE f.is_friend = 1 AND p.is_deleted=0" +
+            " JOIN friendship f ON p.user_name = f.user_receiver" +
+            " WHERE f.is_friend = 1 AND p.is_deleted=0 AND f.user_sender = ?1" +
             " ORDER BY created_at DESC;", nativeQuery = true)
     List<Post> getAllPost(String userName);
 
