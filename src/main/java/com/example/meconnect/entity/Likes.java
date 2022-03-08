@@ -33,6 +33,7 @@ public class Likes {
     @JoinColumn(name = "user_name", referencedColumnName = "username")
     private User user;
 
+
     @Column(name = "created_by")
     private String createdBy;
 

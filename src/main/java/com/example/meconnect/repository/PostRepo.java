@@ -10,12 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-
+@Transactional
 @Repository
 public interface PostRepo extends JpaRepository<Post, Long> {
 
-    //    @Query(value = "SELECT * FROM user_post WHERE isDeleted = 0 ",nativeQuery = true)
-    List<Post> findAllByIsDeletedFalse();
+
+    @Query(value = "SELECT p.* FROM user_post p WHERE p.user_name = ?1 UNION SELECT p.* FROM user_post p JOIN friendship f ON p.user_name = f.user_sender" +
+            " WHERE f.is_friend = 1 AND p.is_deleted=0 AND f.user_receiver = ?1" +
+            " UNION" +
+            " SELECT p.* FROM user_post p" +
+            " JOIN friendship f ON p.user_name = f.user_receiver" +
+            " WHERE f.is_friend = 1 AND p.is_deleted=0 AND f.user_sender = ?1" +
+            " ORDER BY created_at DESC;", nativeQuery = true)
+    List<Post> getAllPost(String userName);
 
     Post save(Post post);
 
@@ -23,7 +30,7 @@ public interface PostRepo extends JpaRepository<Post, Long> {
 
     Post findByPostIdAndIsDeletedFalse(Long postId);
 
-    @Transactional
+
     @Modifying
     @Query(value = "UPDATE user_post p SET p.is_deleted = 1 WHERE  p.id = ?2 AND p.user_name = ?1", nativeQuery = true)
     void deleteByUserNameAndPostId(String username, Long postId);

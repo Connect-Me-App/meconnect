@@ -68,21 +68,20 @@ public class NotificationService {
             notification.setCreatedAt(post.getCreatedAt());
             notification.setUpdatedAt(post.getUpdatedAt());
             notification.setIsRead(Boolean.FALSE);
-        }
-//        else if (Objects.equals(type, "LIKE_ON_COMMENT")) {
+        } else if (Objects.equals(type, "LIKE_ON_COMMENT")) {
 
-//            notification.setUser(post.getUser());
-//            notification.setText(senderUserName + " has liked your comment.");
-//            notification.setIsRead(Boolean.FALSE);
-//            notification.setPostId(postId);
-//            notification.setType(type);
-//            notification.setUrl(postId);
-//            notification.setCreatedBy(senderUserName);
-//            notification.setUpdatedBy(senderUserName);
-//            notification.setCreatedAt(post.getCreatedAt());
-//            notification.setUpdatedAt(post.getUpdatedAt());
-//            notification.setIsRead(Boolean.FALSE);
-//        }
+            notification.setUser(post.getUser());
+            notification.setText(senderUserName + " has liked your comment.");
+            notification.setIsRead(Boolean.FALSE);
+            notification.setPostId(postId);
+            notification.setType(type);
+            notification.setUrl(postId);
+            notification.setCreatedBy(senderUserName);
+            notification.setUpdatedBy(senderUserName);
+            notification.setCreatedAt(post.getCreatedAt());
+            notification.setUpdatedAt(post.getUpdatedAt());
+            notification.setIsRead(Boolean.FALSE);
+        }
         notificationRepo.save(notification);
     }
 }

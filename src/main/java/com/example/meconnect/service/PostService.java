@@ -36,7 +36,8 @@ public class PostService {
     }
 
     public List<PostResponse> getAllPosts() {
-        return postRepo.findAllByIsDeletedFalse()
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return postRepo.getAllPost(username)
                 .stream()
                 .map(postMapper::mapToDto)
                 .collect(Collectors.toList());

@@ -32,11 +32,19 @@ public class UserFriendController {
             return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
         }
         User userfriend = usersserviceimpl.getUserByUserName(username);
+
         if (userfriend == null) {
             return new ResponseEntity<>("this username not exit ", HttpStatus.NOT_FOUND);
         }
 
         String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+
+
+//        boolean check=userFriendshipService.checkRequestPresentOrNot(currentUser,username);
+//
+//        if (check==true) {
+//            return new ResponseEntity<>("friend request already send ", HttpStatus.NOT_FOUND);
+//        }
 
         User_friends user_Friendsentity = userFriendshipService.addtofriend(currentUser, username);
 
@@ -116,8 +124,10 @@ public class UserFriendController {
         if (username == null) {
             return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
         }
-        User userfriend = usersserviceimpl.getUserByUserName(username);
 
+        String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userfriend = usersserviceimpl.getUserByUserName(username);
+        // User userfriend = usersserviceimpl.getUserByUserName(currentUser);
         if (userfriend == null) {
             return new ResponseEntity<>("this username not exit ", HttpStatus.NOT_FOUND);
         }
@@ -140,6 +150,8 @@ public class UserFriendController {
             return new ResponseEntity<>("this username not exit ", HttpStatus.NOT_FOUND);
         }
 
+        String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
+
         List<Users> users = userFriendshipService.notAccptedUserRequest(username);
 
         return new ResponseEntity<>(users, HttpStatus.OK);
@@ -161,12 +173,30 @@ public class UserFriendController {
         String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
         boolean checkfriend = userFriendshipService.checkFriendStatus(currentUser, username);
 
+        System.out.println("***************check friend status  = " + checkfriend);
+
         if (checkfriend == false) {
-            return new ResponseEntity<>("this person are not friend of user ", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>("this user are friend of each other", HttpStatus.OK);
+        return new ResponseEntity<>(1, HttpStatus.OK);
     }
 
+
+    @GetMapping("/RequestSendOrNot/{username}")
+    public ResponseEntity<?> checkRequestSendOrNot(@PathVariable String username) {
+
+        if (username == null) {
+            return new ResponseEntity<>("please enter username ", HttpStatus.NOT_FOUND);
+        }
+
+        int checkStatus = userFriendshipService.checkRequestSendOrNot(username);
+
+        if (checkStatus == 0) {
+            return new ResponseEntity<>(0, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(1, HttpStatus.OK);
+    }
 
 }

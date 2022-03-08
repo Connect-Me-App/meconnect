@@ -6,6 +6,7 @@ import com.example.meconnect.model.Users;
 import com.example.meconnect.repository.UserRepository;
 import com.example.meconnect.repository.verificationTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -31,6 +32,9 @@ public class Usersserviceimpl implements Usersservice {
     @Autowired
     private verificationTokenRepository verificationTokenRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User saveUser(Users user) {
         // TODO Auto-generated method stub
@@ -50,7 +54,8 @@ public class Usersserviceimpl implements Usersservice {
         usersEntity.setCountry(user.getCountry());
         //usersEntity.setIs_active(user.getIs_active());
         usersEntity.setIs_active(false);
-        usersEntity.setPasswordHash(user.getPasswordHash());
+        // usersEntity.setPasswordHash(user.getPasswordHash());
+        usersEntity.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
         usersEntity.setUsername(user.getUsername());
         usersEntity.setLast_login(user.getLast_login());
         usersEntity.setRegistered_at(user.getRegistered_at());
@@ -71,7 +76,7 @@ public class Usersserviceimpl implements Usersservice {
         mailService.sendEmail(user2.getEmail(), "verifiy your account ",
                 "Thank you for signing up to meconnect \n" +
                         " please click on the below url to activate your account : \n" +
-                        "                \"http://localhost:8080/auccountverification/\" " + Token);
+                        "                \"http://localhost:8080/auccountverification/\"" + Token);
 
         return user2;
         //return userRepository.save(usersEntity);
@@ -159,7 +164,7 @@ public class Usersserviceimpl implements Usersservice {
 
         User usersEntity = userRepository.findUserByUsername(username);
 
-        if (user.getUsername() != null) {
+        if (user.getFirst_name() != null) {
             usersEntity.setFirst_name(user.getFirst_name());
         }
 
@@ -189,7 +194,7 @@ public class Usersserviceimpl implements Usersservice {
         }
 
         if (user.getPasswordHash() != null) {
-            usersEntity.setPasswordHash(user.getPasswordHash());
+            usersEntity.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
         }
 
         if (user.getUsername() != null) {
@@ -285,10 +290,10 @@ public class Usersserviceimpl implements Usersservice {
     public int sendMailForForgetPasssword(String token, User user) {
         String url = "http://localhost:8080/auccountverification/";
         try {
-//             mailService.sendEmail(user.getEmail(), "reset your password  ",
-//                     " thankyou \n" +
-//                             " please click on the below url to activate your account : \n" +
-//                                            url + token);
+             mailService.sendEmail(user.getEmail(), "reset your password  ",
+                     " thankyou \n" +
+                             " please click on the below url to activate your account : \n" +
+                                            url + token);
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
@@ -298,8 +303,28 @@ public class Usersserviceimpl implements Usersservice {
     }
 
 
+    public int updateisloginoffline(String username) {
+        User user = getUserByUserName(username);
+        if (user == null) {
+            return 0;
+        }
+        user.setIsonline(0);
+        userRepository.save(user);
+        return 1;
+    }
+
+    public int updateisloginOnline(String username) {
+        User user = getUserByUserName(username);
+        if (user == null) {
+            return 0;
+        }
+        user.setIsonline(1);
+        userRepository.save(user);
+        return 1;
+    }
+
     public User updatePassword(User user, String password) {
-        user.setPasswordHash(password);
+        user.setPasswordHash(passwordEncoder.encode(password));
         return userRepository.save(user);
     }
 

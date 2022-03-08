@@ -63,6 +63,7 @@ public class UserController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         String jwt = jwtUtil.generateToken(userDetails);
 
+        setIsOnlineUser(authenticationRequest.getUsername());
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
 
@@ -197,6 +198,30 @@ public class UserController {
             return new ResponseEntity<>("username already taken by another user ", HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>("username available ", HttpStatus.OK);
+    }
+
+
+    @GetMapping("/setIsOfflineUser/")
+    public ResponseEntity<?> setIsOfflineUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        int checklogout = usersserviceimpl.updateisloginoffline(username);
+        if (checklogout == 0) {
+            return new ResponseEntity<>(0, HttpStatus.NOT_MODIFIED);
+        }
+        return new ResponseEntity<>(1, HttpStatus.OK);
+    }
+
+    @GetMapping("/setIsOnlineUser/")
+    public ResponseEntity<?> setIsOnlineUser(String username2) {
+
+        int checklogout = usersserviceimpl.updateisloginOnline(username2);
+
+        //System.out.println("*************+"+username2 +" setisonline *****"+ checklogout);
+
+        if (checklogout == 0) {
+            return new ResponseEntity<>(0, HttpStatus.NOT_MODIFIED);
+        }
+        return new ResponseEntity<>(1, HttpStatus.OK);
     }
 
 
