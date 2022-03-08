@@ -73,10 +73,10 @@ public class Usersserviceimpl implements Usersservice {
         String Token = generateVerificationToken(user2);
         System.out.println("*-------" + Token + "-------------*");
 
-//        mailService.sendEmail(user2.getEmail(), "verifiy your account ",
-//                "Thank you for signing up to meconnect \n" +
-//                        " please click on the below url to activate your account : \n" +
-//                        "                \"http://localhost:8080/auccountverification/\" " + Token);
+        mailService.sendEmail(user2.getEmail(), "verifiy your account ",
+                "Thank you for signing up to meconnect \n" +
+                        " please click on the below url to activate your account : \n" +
+                        "                \"http://localhost:8080/auccountverification/\"" + Token);
 
         return user2;
         //return userRepository.save(usersEntity);
@@ -290,10 +290,10 @@ public class Usersserviceimpl implements Usersservice {
     public int sendMailForForgetPasssword(String token, User user) {
         String url = "http://localhost:8080/auccountverification/";
         try {
-//             mailService.sendEmail(user.getEmail(), "reset your password  ",
-//                     " thankyou \n" +
-//                             " please click on the below url to activate your account : \n" +
-//                                            url + token);
+             mailService.sendEmail(user.getEmail(), "reset your password  ",
+                     " thankyou \n" +
+                             " please click on the below url to activate your account : \n" +
+                                            url + token);
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
@@ -324,7 +324,7 @@ public class Usersserviceimpl implements Usersservice {
     }
 
     public User updatePassword(User user, String password) {
-        user.setPasswordHash(password);
+        user.setPasswordHash(passwordEncoder.encode(password));
         return userRepository.save(user);
     }
 
