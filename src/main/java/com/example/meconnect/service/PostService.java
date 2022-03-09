@@ -63,5 +63,8 @@ public class PostService {
         return post;
     }
 
+    public PostResponse getPost(Long postId){
+        return postMapper.mapToDto(postRepo.findByPostIdAndIsDeletedFalse(postId));
+    }
 
 }

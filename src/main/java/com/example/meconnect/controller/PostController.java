@@ -1,5 +1,6 @@
 package com.example.meconnect.controller;
 
+import com.example.meconnect.entity.Post;
 import com.example.meconnect.model.PostRequest;
 import com.example.meconnect.model.PostResponse;
 import com.example.meconnect.service.PostService;
@@ -50,5 +51,11 @@ public class PostController {
         postService.deletePost(username, postId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @RequestMapping(value = "/{postId}", method = RequestMethod.GET)
+    public ResponseEntity<PostResponse> getPostById(@PathVariable Long postId){
+        return status(HttpStatus.OK).body(postService.getPost(postId));
+    }
+
 
 }
